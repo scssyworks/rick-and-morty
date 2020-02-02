@@ -14,6 +14,7 @@ export default (req, store, context) => {
             </StaticRouter>
         </Provider>
     );
+
     return `
     <html>
         <head>

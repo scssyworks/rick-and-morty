@@ -15,28 +15,39 @@ app.use(PROXY_PATH, proxy(API_URL, {
 }));
 app.use(express.static('public'));
 app.get('*', (req, res) => {
+    console.log(`REQ received from: ${req.path}`);
     const store = createStore(req);
     const promises = matchRoutes(routes, req.path)
         .map(({ route }) => {
             return route.loadData ? route.loadData(store) : null;
         })
         .map(promise => {
-            return new Promise(resolve => {
-                if (promise) {
+            if (promise) {
+                return new Promise(resolve => {
                     promise
                         .then(resolve)
-                        .catch(resolve);
-                }
-            });
+                        .catch((...args) => {
+                            console.error(...args);
+                            resolve(...args);
+                        });
+                });
+            }
+            return Promise.resolve();
         });
     Promise.all(promises)
         .then(() => {
             const context = {};
             const content = renderer(req, store, context);
+            if (context.url) {
+                return res.redirect(301, context.url);
+            }
             if (context.notFound) {
                 res.status(404);
             }
             res.send(content);
+        })
+        .catch((...args) => {
+            console.error(...args);
         });
 });
 

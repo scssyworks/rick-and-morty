@@ -12,14 +12,17 @@ class UsersListPage extends Component {
             <li key={id}>{name}</li>
         ));
     }
+
     render() {
         return (
-            <div>
-                Here's a big list of users:
-                <ul>
-                    {this.renderUsers()}
-                </ul>
-            </div>
+            <React.Fragment>
+                <div>
+                    Here's a big list of users:
+                    <ul>
+                        {this.renderUsers()}
+                    </ul>
+                </div>
+            </React.Fragment>
         );
     }
 }

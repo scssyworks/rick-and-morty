@@ -484,7 +484,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h3", null, "Protected list of admins"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("ul", null, this.renderAdmins()));
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h3", null, "Protected list of admins"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("ul", null, this.renderAdmins())));
     }
   }]);
 
@@ -519,18 +519,50 @@ function mapStateToProps(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "@babel/runtime/helpers/classCallCheck");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "@babel/runtime/helpers/createClass");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "@babel/runtime/helpers/possibleConstructorReturn");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "@babel/runtime/helpers/getPrototypeOf");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "@babel/runtime/helpers/inherits");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 
 
-var HomePage = function HomePage() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "center-align",
-    style: {
-      marginTop: 200
+
+
+
+
+
+var HomePage =
+/*#__PURE__*/
+function (_Component) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(HomePage, _Component);
+
+  function HomePage() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, HomePage);
+
+    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(HomePage).apply(this, arguments));
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(HomePage, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: "center-align",
+        style: {
+          marginTop: 200
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h3", null, "Welcome"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", null, "Checkout these awesome features")));
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Welcome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Checkout these awesome features"));
-};
+  }]);
+
+  return HomePage;
+}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   component: HomePage
@@ -555,7 +587,7 @@ var NotFoundPage = function NotFoundPage(_ref) {
   var _ref$staticContext = _ref.staticContext,
       staticContext = _ref$staticContext === void 0 ? {} : _ref$staticContext;
   staticContext.notFound = true;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Oops! Page not found");
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Oops! Page not found"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -643,7 +675,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, "Here's a big list of users:", react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("ul", null, this.renderUsers()));
+      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_7___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, "Here's a big list of users:", react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("ul", null, this.renderUsers())));
     }
   }]);
 
@@ -925,26 +957,43 @@ app.use(_shared_constants__WEBPACK_IMPORTED_MODULE_6__["PROXY_PATH"], express_ht
 }));
 app.use(express__WEBPACK_IMPORTED_MODULE_0___default.a.static('public'));
 app.get('*', function (req, res) {
+  console.log("REQ received from: ".concat(req.path));
   var store = Object(_helpers_createStore__WEBPACK_IMPORTED_MODULE_4__["default"])(req);
   var promises = Object(react_router_config__WEBPACK_IMPORTED_MODULE_2__["matchRoutes"])(_client_routes__WEBPACK_IMPORTED_MODULE_5__["default"], req.path).map(function (_ref) {
     var route = _ref.route;
     return route.loadData ? route.loadData(store) : null;
   }).map(function (promise) {
-    return new Promise(function (resolve) {
-      if (promise) {
-        promise.then(resolve).catch(resolve);
-      }
-    });
+    if (promise) {
+      return new Promise(function (resolve) {
+        promise.then(resolve).catch(function () {
+          var _console;
+
+          (_console = console).error.apply(_console, arguments);
+
+          resolve.apply(void 0, arguments);
+        });
+      });
+    }
+
+    return Promise.resolve();
   });
   Promise.all(promises).then(function () {
     var context = {};
     var content = Object(_helpers_renderer__WEBPACK_IMPORTED_MODULE_3__["default"])(req, store, context);
+
+    if (context.url) {
+      return res.redirect(301, context.url);
+    }
 
     if (context.notFound) {
       res.status(404);
     }
 
     res.send(content);
+  }).catch(function () {
+    var _console2;
+
+    (_console2 = console).error.apply(_console2, arguments);
   });
 });
 app.listen(3000, function () {
