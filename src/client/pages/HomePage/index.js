@@ -5,6 +5,7 @@ import './index.scss';
 import { LineChart, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
 
 class HomePage extends Component {
+    page = 1;
     getUpvotes(authorId) {
         const { upvotes } = this.props;
         if (upvotes && upvotes[authorId]) {
@@ -15,6 +16,11 @@ class HomePage extends Component {
 
     upvote(authorId) {
         this.props.updateUpvotes(authorId);
+    }
+
+    loadMoreResults = () => {
+        this.page += 1;
+        this.props.fetchHackerNewsFeed(this.page);
     }
 
     renderFeed = () => {
@@ -34,7 +40,7 @@ class HomePage extends Component {
                 <td className="author">{feedItem.author}</td>
                 <td className="time">
                     <span>{feedItem.time}</span>
-                    <button>[hide]</button>
+                    <button type="button">[hide]</button>
                 </td>
             </tr>
         ));
@@ -54,23 +60,26 @@ class HomePage extends Component {
             return <div className="loader">Loading...</div>;
         }
         return (
-            <div className="hacker-news-feed">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Comments</th>
-                            <th>Upvotes</th>
-                            <th></th>
-                            <th>Title</th>
-                            <th>Domain</th>
-                            <th>Posted By</th>
-                            <th>Posted when?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderFeed()}
-                    </tbody>
-                </table>
+            <React.Fragment>
+                <div className="hacker-news-feed">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Comments</th>
+                                <th>Upvotes</th>
+                                <th></th>
+                                <th>Title</th>
+                                <th>Domain</th>
+                                <th>Posted By</th>
+                                <th>Posted when?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.renderFeed()}
+                        </tbody>
+                    </table>
+                </div>
+                <button onClick={this.loadMoreResults} className="load-more-btn mt-4 mb-4" type="button">Load More</button>
                 <ResponsiveContainer height={300} width="100%">
                     <LineChart data={this.getChartData()}>
                         <CartesianGrid strokeDasharray="3 3" />
@@ -81,7 +90,7 @@ class HomePage extends Component {
                         <Line type="monotone" dataKey="votes" stroke="#8884d8" />
                     </LineChart>
                 </ResponsiveContainer>
-            </div>
+            </React.Fragment>
         );
     }
 

@@ -34,7 +34,15 @@ function feedProcessor(data) {
 export default function (state = [], action) {
     switch (action.type) {
         case FETCH_HACKER_NEWS_FEED:
-            return feedProcessor(action.payload);
+            const newState = [...state];
+            const newList = feedProcessor(action.payload);
+            newList.forEach(newItem => {
+                const existing = newState.find(item => item.authorId === newItem.authorId);
+                if (!existing) {
+                    newState.push(newItem);
+                }
+            });
+            return newState;
         default:
             return state;
     }

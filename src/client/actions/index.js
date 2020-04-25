@@ -1,8 +1,12 @@
 export const FETCH_HACKER_NEWS_FEED = 'fetch_hacker_news_feed';
 
-export const fetchHackerNewsFeed = () => async (...args) => {
+export const fetchHackerNewsFeed = (page) => async (...args) => {
     const [dispatch, , api] = args;
-    const res = await api.get('/search_by_date?tags=story');
+    let URL = '/search_by_date?tags=story';
+    if (page) {
+        URL += `&page=${page}`;
+    }
+    const res = await api.get(URL);
     dispatch({
         type: FETCH_HACKER_NEWS_FEED,
         payload: res.data

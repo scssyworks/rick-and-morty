@@ -155,13 +155,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FETCH_HACKER_NEWS_FEED = 'fetch_hacker_news_feed';
-var fetchHackerNewsFeed = function fetchHackerNewsFeed() {
+var fetchHackerNewsFeed = function fetchHackerNewsFeed(page) {
   return /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee() {
     var _len,
         args,
         _key,
         dispatch,
         api,
+        URL,
         res,
         _args = arguments;
 
@@ -174,17 +175,23 @@ var fetchHackerNewsFeed = function fetchHackerNewsFeed() {
             }
 
             dispatch = args[0], api = args[2];
-            _context.next = 4;
-            return api.get('/search_by_date?tags=story');
+            URL = '/search_by_date?tags=story';
 
-          case 4:
+            if (page) {
+              URL += "&page=".concat(page);
+            }
+
+            _context.next = 6;
+            return api.get(URL);
+
+          case 6:
             res = _context.sent;
             dispatch({
               type: FETCH_HACKER_NEWS_FEED,
               payload: res.data
             });
 
-          case 6:
+          case 8:
           case "end":
             return _context.stop();
         }
@@ -421,6 +428,14 @@ var HomePage = /*#__PURE__*/function (_Component) {
 
     _this = _super.call.apply(_super, [this].concat(args));
 
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "page", 1);
+
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "loadMoreResults", function () {
+      _this.page += 1;
+
+      _this.props.fetchHackerNewsFeed(_this.page);
+    });
+
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "renderFeed", function () {
       var feed = _this.props.feed;
       return feed.map(function (feedItem) {
@@ -451,7 +466,9 @@ var HomePage = /*#__PURE__*/function (_Component) {
           className: "author"
         }, feedItem.author), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
           className: "time"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", null, feedItem.time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", null, "[hide]")));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", null, feedItem.time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+          type: "button"
+        }, "[hide]")));
       });
     });
 
@@ -500,9 +517,13 @@ var HomePage = /*#__PURE__*/function (_Component) {
         }, "Loading...");
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_7___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "hacker-news-feed"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Upvotes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Domain"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Posted By"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Posted when?"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tbody", null, this.renderFeed())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["ResponsiveContainer"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Upvotes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Domain"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Posted By"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Posted when?"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tbody", null, this.renderFeed()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+        onClick: this.loadMoreResults,
+        className: "load-more-btn mt-4 mb-4",
+        type: "button"
+      }, "Load More"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["ResponsiveContainer"], {
         height: 300,
         width: "100%"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["LineChart"], {
@@ -598,7 +619,10 @@ var NotFoundPage = function NotFoundPage(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./src/client/actions/index.js");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "@babel/runtime/helpers/toConsumableArray");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/client/actions/index.js");
+
 
 
 function getTimeParam(isoTime) {
@@ -646,8 +670,20 @@ function feedProcessor(data) {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions__WEBPACK_IMPORTED_MODULE_0__["FETCH_HACKER_NEWS_FEED"]:
-      return feedProcessor(action.payload);
+    case _actions__WEBPACK_IMPORTED_MODULE_1__["FETCH_HACKER_NEWS_FEED"]:
+      var newState = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(state);
+
+      var newList = feedProcessor(action.payload);
+      newList.forEach(function (newItem) {
+        var existing = newState.find(function (item) {
+          return item.authorId === newItem.authorId;
+        });
+
+        if (!existing) {
+          newState.push(newItem);
+        }
+      });
+      return newState;
 
     default:
       return state;
@@ -1002,6 +1038,17 @@ module.exports = require("@babel/runtime/helpers/inherits");
 /***/ (function(module, exports) {
 
 module.exports = require("@babel/runtime/helpers/possibleConstructorReturn");
+
+/***/ }),
+
+/***/ "@babel/runtime/helpers/toConsumableArray":
+/*!***********************************************************!*\
+  !*** external "@babel/runtime/helpers/toConsumableArray" ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/toConsumableArray");
 
 /***/ }),
 
