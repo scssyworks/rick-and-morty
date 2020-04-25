@@ -133,7 +133,7 @@ var App = function App(_ref) {
 /*!*************************************!*\
   !*** ./src/client/actions/index.js ***!
   \*************************************/
-/*! exports provided: FETCH_HACKER_NEWS_FEED, fetchHackerNewsFeed, UPVOTES, FETCH_UPVOTES, fetchUpvotes, UPDATE_UPVOTES, updateUpvotes */
+/*! exports provided: FETCH_HACKER_NEWS_FEED, fetchHackerNewsFeed, UPVOTES, FETCH_UPVOTES, fetchUpvotes, UPDATE_UPVOTES, updateUpvotes, HIDDEN_STATUS, fetchHiddenFeeds, HIDE_FEED, hideFeed */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -145,6 +145,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUpvotes", function() { return fetchUpvotes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_UPVOTES", function() { return UPDATE_UPVOTES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUpvotes", function() { return updateUpvotes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HIDDEN_STATUS", function() { return HIDDEN_STATUS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchHiddenFeeds", function() { return fetchHiddenFeeds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HIDE_FEED", function() { return HIDE_FEED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideFeed", function() { return hideFeed; });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "@babel/runtime/helpers/defineProperty");
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
@@ -220,25 +224,65 @@ function getUpvotes() {
 }
 
 function updateUpvotesLS(authorId) {
-  return new Promise(function (resolve) {
+  return new Promise(function (resolve, reject) {
     setTimeout(function () {
-      if (typeof Storage !== 'undefined') {
-        var ls = JSON.parse(localStorage.getItem(UPVOTES) || '{}');
-        var prevCount = ls[authorId] || 0;
+      try {
+        if (typeof Storage !== 'undefined') {
+          var ls = JSON.parse(localStorage.getItem(UPVOTES) || '{}');
+          var prevCount = ls[authorId] || 0;
 
-        if (prevCount < 10) {
-          ls[authorId] = prevCount + 1;
+          if (prevCount < 10) {
+            ls[authorId] = prevCount + 1;
+          }
+
+          localStorage.setItem(UPVOTES, JSON.stringify(ls));
+          resolve(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, authorId, ls[authorId])); // Assuming API will return new count for given authorId
+        } else {
+          resolve(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, authorId, 0));
         }
-
-        localStorage.setItem(UPVOTES, JSON.stringify(ls));
-        resolve(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, authorId, ls[authorId])); // Assuming API will return new count for given authorId
-      } else {
-        resolve(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, authorId, 0));
+      } catch (e) {
+        reject(e);
       }
     }, 0);
   });
-} // Temporary local storage code ends
+}
 
+function getHidden() {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      try {
+        if (typeof Storage !== 'undefined') {
+          var ls = localStorage.getItem('hidden') || '{}';
+          resolve(JSON.parse(ls));
+        } else {
+          resolve({}); // For server side
+        }
+      } catch (e) {
+        reject(e);
+      }
+    }, 0);
+  });
+}
+
+function hideFeedLS(authorId) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      try {
+        if (typeof Storage !== 'undefined') {
+          var ls = JSON.parse(localStorage.getItem('hidden') || '{}');
+          ls[authorId] = true;
+          resolve(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, authorId, true));
+        } else {
+          resolve(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, authorId, false));
+        }
+      } catch (e) {
+        reject(e);
+      }
+    }, 0);
+  });
+}
+
+; // Temporary local storage code ends
 
 var FETCH_UPVOTES = 'fetch_upvotes';
 var fetchUpvotes = function fetchUpvotes() {
@@ -317,6 +361,82 @@ var updateUpvotes = function updateUpvotes(authorId) {
     }, _callee3);
   }));
 };
+var HIDDEN_STATUS = 'hidden_status';
+var fetchHiddenFeeds = function fetchHiddenFeeds() {
+  return /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee4() {
+    var _len4,
+        args,
+        _key4,
+        dispatch,
+        res,
+        _args4 = arguments;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            for (_len4 = _args4.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+              args[_key4] = _args4[_key4];
+            }
+
+            dispatch = args[0]; // We will use api in future to get hidden status via service
+
+            _context4.next = 4;
+            return getHidden();
+
+          case 4:
+            res = _context4.sent;
+            dispatch({
+              type: HIDDEN_STATUS,
+              payload: res
+            });
+
+          case 6:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+};
+var HIDE_FEED = 'hide_feed';
+var hideFeed = function hideFeed(authorId) {
+  return /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee5() {
+    var _len5,
+        args,
+        _key5,
+        dispatch,
+        res,
+        _args5 = arguments;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            for (_len5 = _args5.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+              args[_key5] = _args5[_key5];
+            }
+
+            dispatch = args[0]; // We will use api in future to update hidden status via service
+
+            _context5.next = 4;
+            return hideFeedLS(authorId);
+
+          case 4:
+            res = _context5.sent;
+            dispatch({
+              type: HIDE_FEED,
+              payload: res
+            });
+
+          case 6:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+};
 
 /***/ }),
 
@@ -389,11 +509,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../actions */ "./src/client/actions/index.js");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./index.scss */ "./src/client/pages/HomePage/index.scss");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! recharts */ "recharts");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(recharts__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! recharts */ "recharts");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(recharts__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../actions */ "./src/client/actions/index.js");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./index.scss */ "./src/client/pages/HomePage/index.scss");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -436,9 +556,17 @@ var HomePage = /*#__PURE__*/function (_Component) {
       _this.props.fetchHackerNewsFeed(_this.page);
     });
 
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "hideItem", function (authorId) {
+      _this.props.hideFeed(authorId);
+    });
+
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "renderFeed", function () {
-      var feed = _this.props.feed;
-      return feed.map(function (feedItem) {
+      var _this$props = _this.props,
+          feed = _this$props.feed,
+          hidden = _this$props.hidden;
+      return feed.filter(function (feedItem) {
+        return !hidden[feedItem.authorId];
+      }).map(function (feedItem) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", {
           key: feedItem.authorId
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
@@ -467,6 +595,9 @@ var HomePage = /*#__PURE__*/function (_Component) {
         }, feedItem.author), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
           className: "time"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", null, feedItem.time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this.hideItem(feedItem.authorId);
+          },
           type: "button"
         }, "[hide]")));
       });
@@ -494,10 +625,13 @@ var HomePage = /*#__PURE__*/function (_Component) {
   }, {
     key: "getChartData",
     value: function getChartData() {
-      var _this$props = this.props,
-          feed = _this$props.feed,
-          upvotes = _this$props.upvotes;
-      return feed.map(function (feedItem) {
+      var _this$props2 = this.props,
+          feed = _this$props2.feed,
+          upvotes = _this$props2.upvotes,
+          hidden = _this$props2.hidden;
+      return feed.filter(function (feedItem) {
+        return !hidden[feedItem.authorId];
+      }).map(function (feedItem) {
         return {
           id: feedItem.author,
           votes: upvotes[feedItem.authorId] || 0
@@ -507,11 +641,12 @@ var HomePage = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props2 = this.props,
-          feed = _this$props2.feed,
-          upvotes = _this$props2.upvotes;
+      var _this$props3 = this.props,
+          feed = _this$props3.feed,
+          upvotes = _this$props3.upvotes,
+          hidden = _this$props3.hidden;
 
-      if (!(feed && upvotes)) {
+      if (!(feed && upvotes && hidden)) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
           className: "loader"
         }, "Loading...");
@@ -523,16 +658,16 @@ var HomePage = /*#__PURE__*/function (_Component) {
         onClick: this.loadMoreResults,
         className: "load-more-btn mt-4 mb-4",
         type: "button"
-      }, "Load More"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["ResponsiveContainer"], {
+      }, "Load More"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_9__["ResponsiveContainer"], {
         height: 300,
         width: "100%"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["LineChart"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_9__["LineChart"], {
         data: this.getChartData()
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["CartesianGrid"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_9__["CartesianGrid"], {
         strokeDasharray: "3 3"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["XAxis"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_9__["XAxis"], {
         dataKey: "id"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["YAxis"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["Tooltip"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["Legend"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["Line"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_9__["YAxis"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_9__["Tooltip"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_9__["Legend"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_9__["Line"], {
         type: "monotone",
         dataKey: "votes",
         stroke: "#8884d8"
@@ -543,6 +678,7 @@ var HomePage = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       this.props.fetchHackerNewsFeed();
       this.props.fetchUpvotes();
+      this.props.fetchHiddenFeeds();
     }
   }]);
 
@@ -551,22 +687,26 @@ var HomePage = /*#__PURE__*/function (_Component) {
 
 function mapStateToProps(_ref) {
   var feed = _ref.feed,
-      upvotes = _ref.upvotes;
+      upvotes = _ref.upvotes,
+      hidden = _ref.hidden;
   return {
     feed: feed,
-    upvotes: upvotes
+    upvotes: upvotes,
+    hidden: hidden
   };
 }
 
 function loadData(store) {
-  return Promise.all([store.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_9__["fetchHackerNewsFeed"])()), store.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_9__["fetchUpvotes"])())]);
+  return Promise.all([store.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_10__["fetchHackerNewsFeed"])()), store.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_10__["fetchUpvotes"])()), store.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_10__["fetchHiddenFeeds"])())]);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   component: Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["connect"])(mapStateToProps, {
-    fetchHackerNewsFeed: _actions__WEBPACK_IMPORTED_MODULE_9__["fetchHackerNewsFeed"],
-    fetchUpvotes: _actions__WEBPACK_IMPORTED_MODULE_9__["fetchUpvotes"],
-    updateUpvotes: _actions__WEBPACK_IMPORTED_MODULE_9__["updateUpvotes"]
+    fetchHackerNewsFeed: _actions__WEBPACK_IMPORTED_MODULE_10__["fetchHackerNewsFeed"],
+    fetchUpvotes: _actions__WEBPACK_IMPORTED_MODULE_10__["fetchUpvotes"],
+    updateUpvotes: _actions__WEBPACK_IMPORTED_MODULE_10__["updateUpvotes"],
+    fetchHiddenFeeds: _actions__WEBPACK_IMPORTED_MODULE_10__["fetchHiddenFeeds"],
+    hideFeed: _actions__WEBPACK_IMPORTED_MODULE_10__["hideFeed"]
   })(HomePage),
   loadData: loadData
 });
@@ -644,7 +784,7 @@ function getTimeParam(isoTime) {
   var hours = minutes / 60; // minutes to hours
 
   if (hours < 24) {
-    return "".concat(hours, " hours ago");
+    return "".concat(Math.round(hours), " hours ago");
   }
 
   var days = hours / 24; // hours to days
@@ -692,6 +832,44 @@ function feedProcessor(data) {
 
 /***/ }),
 
+/***/ "./src/client/reducers/hiddenReducer.js":
+/*!**********************************************!*\
+  !*** ./src/client/reducers/hiddenReducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "@babel/runtime/helpers/defineProperty");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/client/actions/index.js");
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions__WEBPACK_IMPORTED_MODULE_1__["HIDDEN_STATUS"]:
+      return action.payload;
+
+    case _actions__WEBPACK_IMPORTED_MODULE_1__["HIDE_FEED"]:
+      return _objectSpread({}, state, {}, action.payload);
+
+    default:
+      return state;
+  }
+});
+;
+
+/***/ }),
+
 /***/ "./src/client/reducers/index.js":
 /*!**************************************!*\
   !*** ./src/client/reducers/index.js ***!
@@ -705,12 +883,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _feedReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedReducer */ "./src/client/reducers/feedReducer.js");
 /* harmony import */ var _upvoteReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./upvoteReducer */ "./src/client/reducers/upvoteReducer.js");
+/* harmony import */ var _hiddenReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./hiddenReducer */ "./src/client/reducers/hiddenReducer.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   feed: _feedReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  upvotes: _upvoteReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  upvotes: _upvoteReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  hidden: _hiddenReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),

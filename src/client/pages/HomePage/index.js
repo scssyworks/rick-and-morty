@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchHackerNewsFeed, fetchUpvotes, updateUpvotes } from '../../actions';
-import './index.scss';
 import { LineChart, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
+import { fetchHackerNewsFeed, fetchUpvotes, updateUpvotes, fetchHiddenFeeds, hideFeed } from '../../actions';
+import './index.scss';
 
 class HomePage extends Component {
     page = 1;
@@ -23,40 +23,48 @@ class HomePage extends Component {
         this.props.fetchHackerNewsFeed(this.page);
     }
 
+    hideItem = (authorId) => {
+        this.props.hideFeed(authorId);
+    }
+
     renderFeed = () => {
-        const { feed } = this.props;
-        return feed.map(feedItem => (
-            <tr key={feedItem.authorId}>
-                <td className="comment-count">{feedItem.commentCount}</td>
-                <td className="upvote-count">{this.getUpvotes(feedItem.authorId)}</td>
-                <td className="upvote-control">
-                    <button onClick={() => this.upvote(feedItem.authorId)} type="button">
-                        <span className="caret up"></span>
-                        <span className="sr-only">Upvode</span>
-                    </button>
-                </td>
-                <td className="title">{feedItem.title}</td>
-                <td className="url">{feedItem.url ? <a href={feedItem.url}>{feedItem.url}</a> : ''}</td>
-                <td className="author">{feedItem.author}</td>
-                <td className="time">
-                    <span>{feedItem.time}</span>
-                    <button type="button">[hide]</button>
-                </td>
-            </tr>
-        ));
+        const { feed, hidden } = this.props;
+        return feed
+            .filter(feedItem => !hidden[feedItem.authorId])
+            .map(feedItem => (
+                <tr key={feedItem.authorId}>
+                    <td className="comment-count">{feedItem.commentCount}</td>
+                    <td className="upvote-count">{this.getUpvotes(feedItem.authorId)}</td>
+                    <td className="upvote-control">
+                        <button onClick={() => this.upvote(feedItem.authorId)} type="button">
+                            <span className="caret up"></span>
+                            <span className="sr-only">Upvode</span>
+                        </button>
+                    </td>
+                    <td className="title">{feedItem.title}</td>
+                    <td className="url">{feedItem.url ? <a href={feedItem.url}>{feedItem.url}</a> : ''}</td>
+                    <td className="author">{feedItem.author}</td>
+                    <td className="time">
+                        <span>{feedItem.time}</span>
+                        <button onClick={() => this.hideItem(feedItem.authorId)} type="button">[hide]</button>
+                    </td>
+                </tr>
+            ));
     }
 
     getChartData() {
-        const { feed, upvotes } = this.props;
-        return feed.map(feedItem => ({
-            id: feedItem.author,
-            votes: (upvotes[feedItem.authorId] || 0)
-        }));
+        const { feed, upvotes, hidden } = this.props;
+        return feed
+            .filter(feedItem => !hidden[feedItem.authorId])
+            .map(feedItem => ({
+                id: feedItem.author,
+                votes: (upvotes[feedItem.authorId] || 0)
+            }));
     }
 
     render() {
-        const { feed, upvotes } = this.props;
-        if (!(feed && upvotes)) {
+        const { feed, upvotes, hidden } = this.props;
+        if (!(feed && upvotes && hidden)) {
             return <div className="loader">Loading...</div>;
         }
         return (
@@ -97,25 +105,31 @@ class HomePage extends Component {
     componentDidMount() {
         this.props.fetchHackerNewsFeed();
         this.props.fetchUpvotes();
+        this.props.fetchHiddenFeeds();
     }
 }
 
-function mapStateToProps({ feed, upvotes }) {
-    return { feed, upvotes };
+function mapStateToProps({ feed, upvotes, hidden }) {
+    return { feed, upvotes, hidden };
 }
 
 function loadData(store) {
     return Promise.all([
         store.dispatch(fetchHackerNewsFeed()),
-        store.dispatch(fetchUpvotes())
+        store.dispatch(fetchUpvotes()),
+        store.dispatch(fetchHiddenFeeds())
     ]);
 }
+
+
 
 export default {
     component: connect(mapStateToProps, {
         fetchHackerNewsFeed,
         fetchUpvotes,
-        updateUpvotes
+        updateUpvotes,
+        fetchHiddenFeeds,
+        hideFeed
     })(HomePage),
     loadData
 };

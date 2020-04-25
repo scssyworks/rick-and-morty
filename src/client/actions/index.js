@@ -32,26 +32,69 @@ function getUpvotes() {
     });
 }
 function updateUpvotesLS(authorId) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (typeof Storage !== 'undefined') {
-                const ls = JSON.parse(localStorage.getItem(UPVOTES) || '{}');
-                const prevCount = ls[authorId] || 0;
-                if (prevCount < 10) {
-                    ls[authorId] = prevCount + 1;
+            try {
+                if (typeof Storage !== 'undefined') {
+                    const ls = JSON.parse(localStorage.getItem(UPVOTES) || '{}');
+                    const prevCount = ls[authorId] || 0;
+                    if (prevCount < 10) {
+                        ls[authorId] = prevCount + 1;
+                    }
+                    localStorage.setItem(UPVOTES, JSON.stringify(ls));
+                    resolve({
+                        [authorId]: ls[authorId]
+                    }); // Assuming API will return new count for given authorId
+                } else {
+                    resolve({
+                        [authorId]: 0
+                    });
                 }
-                localStorage.setItem(UPVOTES, JSON.stringify(ls));
-                resolve({
-                    [authorId]: ls[authorId]
-                }); // Assuming API will return new count for given authorId
-            } else {
-                resolve({
-                    [authorId]: 0
-                });
+            } catch (e) {
+                reject(e);
             }
         }, 0);
     });
 }
+
+function getHidden() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                if (typeof Storage !== 'undefined') {
+                    const ls = localStorage.getItem('hidden') || '{}';
+                    resolve(JSON.parse(ls));
+                } else {
+                    resolve({}); // For server side
+                }
+            } catch (e) {
+                reject(e);
+            }
+        }, 0);
+    });
+}
+
+function hideFeedLS(authorId) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                if (typeof Storage !== 'undefined') {
+                    const ls = JSON.parse(localStorage.getItem('hidden') || '{}');
+                    ls[authorId] = true;
+                    resolve({
+                        [authorId]: true
+                    });
+                } else {
+                    resolve({
+                        [authorId]: false
+                    });
+                }
+            } catch (e) {
+                reject(e);
+            }
+        }, 0);
+    });
+};
 // Temporary local storage code ends
 
 export const FETCH_UPVOTES = 'fetch_upvotes';
@@ -70,6 +113,26 @@ export const updateUpvotes = (authorId) => async (...args) => {
     const res = await updateUpvotesLS(authorId);
     dispatch({
         type: UPDATE_UPVOTES,
+        payload: res
+    });
+}
+
+export const HIDDEN_STATUS = 'hidden_status';
+export const fetchHiddenFeeds = () => async (...args) => {
+    const [dispatch] = args; // We will use api in future to get hidden status via service
+    const res = await getHidden();
+    dispatch({
+        type: HIDDEN_STATUS,
+        payload: res
+    });
+}
+
+export const HIDE_FEED = 'hide_feed';
+export const hideFeed = (authorId) => async (...args) => {
+    const [dispatch] = args; // We will use api in future to update hidden status via service
+    const res = await hideFeedLS(authorId);
+    dispatch({
+        type: HIDE_FEED,
         payload: res
     });
 }

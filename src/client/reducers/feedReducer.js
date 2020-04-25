@@ -14,7 +14,7 @@ function getTimeParam(isoTime) {
     }
     const hours = minutes / 60; // minutes to hours
     if (hours < 24) {
-        return `${hours} hours ago`;
+        return `${Math.round(hours)} hours ago`;
     }
     const days = hours / 24; // hours to days
     return `${Math.round(days)} days ago`;
