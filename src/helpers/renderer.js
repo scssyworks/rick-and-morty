@@ -22,7 +22,9 @@ export default (req, store, context) => {
             <link rel="stylesheet" href="bundle.css" />
         </head>
         <body>
-            <div id="root">${content}</div>
+            <div class="container pb-4">
+                <div id="root">${content}</div>
+            </div>
             <script>
                 window.INITIAL_STATE = ${serialize(store.getState())}
             </script>

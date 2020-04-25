@@ -99,9 +99,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-config */ "react-router-config");
 /* harmony import */ var react_router_config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_config__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./src/client/actions/index.js");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index.scss */ "./src/client/App/index.scss");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.scss */ "./src/client/App/index.scss");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Header */ "./src/client/components/Header/index.js");
 
 
 
@@ -109,15 +109,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var App = function App(_ref) {
   var route = _ref.route;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, Object(react_router_config__WEBPACK_IMPORTED_MODULE_1__["renderRoutes"])(route.routes));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), Object(react_router_config__WEBPACK_IMPORTED_MODULE_1__["renderRoutes"])(route.routes));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  component: App,
-  loadData: function loadData(_ref2) {
-    var dispatch = _ref2.dispatch;
-    return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["fetchCurrentUser"])());
-  }
+  component: App
 });
 
 /***/ }),
@@ -137,26 +133,30 @@ var App = function App(_ref) {
 /*!*************************************!*\
   !*** ./src/client/actions/index.js ***!
   \*************************************/
-/*! exports provided: FETCH_USERS, fetchUsers, FETCH_CURRENT_USER, fetchCurrentUser, FETCH_ADMINS, fetchAdmins */
+/*! exports provided: FETCH_HACKER_NEWS_FEED, fetchHackerNewsFeed, UPVOTES, FETCH_UPVOTES, fetchUpvotes, UPDATE_UPVOTES, updateUpvotes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_USERS", function() { return FETCH_USERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_CURRENT_USER", function() { return FETCH_CURRENT_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCurrentUser", function() { return fetchCurrentUser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_ADMINS", function() { return FETCH_ADMINS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAdmins", function() { return fetchAdmins; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "@babel/runtime/helpers/asyncToGenerator");
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_HACKER_NEWS_FEED", function() { return FETCH_HACKER_NEWS_FEED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchHackerNewsFeed", function() { return fetchHackerNewsFeed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPVOTES", function() { return UPVOTES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_UPVOTES", function() { return FETCH_UPVOTES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUpvotes", function() { return fetchUpvotes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_UPVOTES", function() { return UPDATE_UPVOTES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUpvotes", function() { return updateUpvotes; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "@babel/runtime/helpers/defineProperty");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "@babel/runtime/helpers/asyncToGenerator");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__);
 
 
-var FETCH_USERS = 'fetch_users';
-var fetchUsers = function fetchUsers() {
-  return /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+
+var FETCH_HACKER_NEWS_FEED = 'fetch_hacker_news_feed';
+var fetchHackerNewsFeed = function fetchHackerNewsFeed() {
+  return /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee() {
     var _len,
         args,
         _key,
@@ -165,7 +165,7 @@ var fetchUsers = function fetchUsers() {
         res,
         _args = arguments;
 
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -175,13 +175,13 @@ var fetchUsers = function fetchUsers() {
 
             dispatch = args[0], api = args[2];
             _context.next = 4;
-            return api.get('/users');
+            return api.get('/search_by_date?tags=story');
 
           case 4:
             res = _context.sent;
             dispatch({
-              type: FETCH_USERS,
-              payload: res
+              type: FETCH_HACKER_NEWS_FEED,
+              payload: res.data
             });
 
           case 6:
@@ -191,19 +191,59 @@ var fetchUsers = function fetchUsers() {
       }
     }, _callee);
   }));
-};
-var FETCH_CURRENT_USER = 'fetch_current_user';
-var fetchCurrentUser = function fetchCurrentUser() {
-  return /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+}; // Temporary local storage code below
+
+var UPVOTES = 'upvotes';
+
+function getUpvotes() {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      try {
+        if (typeof Storage !== 'undefined') {
+          var ls = localStorage.getItem(UPVOTES) || '{}';
+          resolve(JSON.parse(ls));
+        } else {
+          resolve({}); // Server side resolve
+        }
+      } catch (e) {
+        reject(e);
+      }
+    }, 0);
+  });
+}
+
+function updateUpvotesLS(authorId) {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      if (typeof Storage !== 'undefined') {
+        var ls = JSON.parse(localStorage.getItem(UPVOTES) || '{}');
+        var prevCount = ls[authorId] || 0;
+
+        if (prevCount < 10) {
+          ls[authorId] = prevCount + 1;
+        }
+
+        localStorage.setItem(UPVOTES, JSON.stringify(ls));
+        resolve(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, authorId, ls[authorId])); // Assuming API will return new count for given authorId
+      } else {
+        resolve(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, authorId, 0));
+      }
+    }, 0);
+  });
+} // Temporary local storage code ends
+
+
+var FETCH_UPVOTES = 'fetch_upvotes';
+var fetchUpvotes = function fetchUpvotes() {
+  return /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee2() {
     var _len2,
         args,
         _key2,
         dispatch,
-        api,
         res,
         _args2 = arguments;
 
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -211,14 +251,16 @@ var fetchCurrentUser = function fetchCurrentUser() {
               args[_key2] = _args2[_key2];
             }
 
-            dispatch = args[0], api = args[2];
+            dispatch = args[0]; // We will use api in future to fetch upvotes using a service
+
             _context2.next = 4;
-            return api.get('/current_user');
+            return getUpvotes();
 
           case 4:
             res = _context2.sent;
+            // To be replaced with API call
             dispatch({
-              type: FETCH_CURRENT_USER,
+              type: FETCH_UPVOTES,
               payload: res
             });
 
@@ -230,18 +272,17 @@ var fetchCurrentUser = function fetchCurrentUser() {
     }, _callee2);
   }));
 };
-var FETCH_ADMINS = 'fetch_admins';
-var fetchAdmins = function fetchAdmins() {
-  return /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+var UPDATE_UPVOTES = 'update_upvotes';
+var updateUpvotes = function updateUpvotes(authorId) {
+  return /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee3() {
     var _len3,
         args,
         _key3,
         dispatch,
-        api,
         res,
         _args3 = arguments;
 
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
@@ -249,14 +290,15 @@ var fetchAdmins = function fetchAdmins() {
               args[_key3] = _args3[_key3];
             }
 
-            dispatch = args[0], api = args[2];
+            dispatch = args[0]; // We will use api in future to increase upvotes using a service
+
             _context3.next = 4;
-            return api.get('/admins');
+            return updateUpvotesLS(authorId);
 
           case 4:
             res = _context3.sent;
             dispatch({
-              type: FETCH_ADMINS,
+              type: UPDATE_UPVOTES,
               payload: res
             });
 
@@ -268,6 +310,48 @@ var fetchAdmins = function fetchAdmins() {
     }, _callee3);
   }));
 };
+
+/***/ }),
+
+/***/ "./src/client/components/Header/index.js":
+/*!***********************************************!*\
+  !*** ./src/client/components/Header/index.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./src/client/components/Header/index.scss");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var Header = function Header() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+    className: "hacker-news-clone-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "logo"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "https://hn.algolia.com/packs/media/images/logo-hn-search-a822432b.png",
+    alt: "Hacker News clone"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hacker News Clone"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
+/***/ "./src/client/components/Header/index.scss":
+/*!*************************************************!*\
+  !*** ./src/client/components/Header/index.scss ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 
@@ -284,55 +368,198 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "@babel/runtime/helpers/createClass");
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "@babel/runtime/helpers/inherits");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "@babel/runtime/helpers/possibleConstructorReturn");
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "@babel/runtime/helpers/getPrototypeOf");
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "@babel/runtime/helpers/assertThisInitialized");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "@babel/runtime/helpers/inherits");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "@babel/runtime/helpers/possibleConstructorReturn");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "@babel/runtime/helpers/getPrototypeOf");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "@babel/runtime/helpers/defineProperty");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../actions */ "./src/client/actions/index.js");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./index.scss */ "./src/client/pages/HomePage/index.scss");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! recharts */ "recharts");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(recharts__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
 
 
 
-function _createSuper(Derived) { return function () { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3___default()(this, result); }; }
+
+
+function _createSuper(Derived) { return function () { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 
 
+
+
+
+
 var HomePage = /*#__PURE__*/function (_Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default()(HomePage, _Component);
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(HomePage, _Component);
 
   var _super = _createSuper(HomePage);
 
   function HomePage() {
+    var _this;
+
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, HomePage);
 
-    return _super.apply(this, arguments);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "renderFeed", function () {
+      var feed = _this.props.feed;
+      return feed.map(function (feedItem) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", {
+          key: feedItem.authorId
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
+          className: "comment-count"
+        }, feedItem.commentCount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
+          className: "upvote-count"
+        }, _this.getUpvotes(feedItem.authorId)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
+          className: "upvote-control"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this.upvote(feedItem.authorId);
+          },
+          type: "button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
+          className: "caret up"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
+          className: "sr-only"
+        }, "Upvode"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
+          className: "title"
+        }, feedItem.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
+          className: "url"
+        }, feedItem.url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("a", {
+          href: feedItem.url
+        }, feedItem.url) : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
+          className: "author"
+        }, feedItem.author), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("td", {
+          className: "time"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", null, feedItem.time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", null, "[hide]")));
+      });
+    });
+
+    return _this;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(HomePage, [{
+    key: "getUpvotes",
+    value: function getUpvotes(authorId) {
+      var upvotes = this.props.upvotes;
+
+      if (upvotes && upvotes[authorId]) {
+        return +upvotes[authorId];
+      }
+
+      return 0;
+    }
+  }, {
+    key: "upvote",
+    value: function upvote(authorId) {
+      this.props.updateUpvotes(authorId);
+    }
+  }, {
+    key: "getChartData",
+    value: function getChartData() {
+      var _this$props = this.props,
+          feed = _this$props.feed,
+          upvotes = _this$props.upvotes;
+      return feed.map(function (feedItem) {
+        return {
+          id: feedItem.author,
+          votes: upvotes[feedItem.authorId] || 0
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-        className: "center-align",
-        style: {
-          marginTop: 200
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h3", null, "Welcome"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", null, "Checkout these awesome features")));
+      var _this$props2 = this.props,
+          feed = _this$props2.feed,
+          upvotes = _this$props2.upvotes;
+
+      if (!(feed && upvotes)) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          className: "loader"
+        }, "Loading...");
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "hacker-news-feed"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Upvotes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Domain"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Posted By"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", null, "Posted when?"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tbody", null, this.renderFeed())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["ResponsiveContainer"], {
+        height: 300,
+        width: "100%"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["LineChart"], {
+        data: this.getChartData()
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["CartesianGrid"], {
+        strokeDasharray: "3 3"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["XAxis"], {
+        dataKey: "id"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["YAxis"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["Tooltip"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["Legend"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_11__["Line"], {
+        type: "monotone",
+        dataKey: "votes",
+        stroke: "#8884d8"
+      }))));
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchHackerNewsFeed();
+      this.props.fetchUpvotes();
     }
   }]);
 
   return HomePage;
-}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_7__["Component"]);
+
+function mapStateToProps(_ref) {
+  var feed = _ref.feed,
+      upvotes = _ref.upvotes;
+  return {
+    feed: feed,
+    upvotes: upvotes
+  };
+}
+
+function loadData(store) {
+  return Promise.all([store.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_9__["fetchHackerNewsFeed"])()), store.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_9__["fetchUpvotes"])())]);
+}
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  component: HomePage
+  component: Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["connect"])(mapStateToProps, {
+    fetchHackerNewsFeed: _actions__WEBPACK_IMPORTED_MODULE_9__["fetchHackerNewsFeed"],
+    fetchUpvotes: _actions__WEBPACK_IMPORTED_MODULE_9__["fetchUpvotes"],
+    updateUpvotes: _actions__WEBPACK_IMPORTED_MODULE_9__["updateUpvotes"]
+  })(HomePage),
+  loadData: loadData
 });
+
+/***/ }),
+
+/***/ "./src/client/pages/HomePage/index.scss":
+/*!**********************************************!*\
+  !*** ./src/client/pages/HomePage/index.scss ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 
@@ -362,35 +589,9 @@ var NotFoundPage = function NotFoundPage(_ref) {
 
 /***/ }),
 
-/***/ "./src/client/reducers/adminsReducer.js":
-/*!**********************************************!*\
-  !*** ./src/client/reducers/adminsReducer.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./src/client/actions/index.js");
-
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case _actions__WEBPACK_IMPORTED_MODULE_0__["FETCH_ADMINS"]:
-      return action.payload.data;
-
-    default:
-      return state;
-  }
-});
-
-/***/ }),
-
-/***/ "./src/client/reducers/authReducer.js":
+/***/ "./src/client/reducers/feedReducer.js":
 /*!********************************************!*\
-  !*** ./src/client/reducers/authReducer.js ***!
+  !*** ./src/client/reducers/feedReducer.js ***!
   \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -399,13 +600,54 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./src/client/actions/index.js");
 
+
+function getTimeParam(isoTime) {
+  var currentTimestamp = Date.now();
+  var inputTimestamp = new Date(isoTime).getTime();
+  var timeDiff = currentTimestamp - inputTimestamp;
+  var seconds = timeDiff / 1000; // milliseconds to seconds
+
+  if (seconds < 60) {
+    return "".concat(Math.round(seconds), " seconds ago");
+  }
+
+  var minutes = seconds / 60; // seconds to minutes;
+
+  if (minutes < 60) {
+    return "".concat(Math.round(minutes), " minutes ago");
+  }
+
+  var hours = minutes / 60; // minutes to hours
+
+  if (hours < 24) {
+    return "".concat(hours, " hours ago");
+  }
+
+  var days = hours / 24; // hours to days
+
+  return "".concat(Math.round(days), " days ago");
+}
+
+function feedProcessor(data) {
+  return data.hits.map(function (feedItem) {
+    return {
+      time: getTimeParam(feedItem.created_at),
+      title: feedItem.title,
+      author: feedItem.author,
+      url: feedItem.url,
+      commentCount: feedItem.num_comments,
+      authorId: "".concat(feedItem.author, "_").concat(new Date(feedItem.created_at).getTime())
+    };
+  });
+}
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions__WEBPACK_IMPORTED_MODULE_0__["FETCH_CURRENT_USER"]:
-      return action.payload.data || false;
+    case _actions__WEBPACK_IMPORTED_MODULE_0__["FETCH_HACKER_NEWS_FEED"]:
+      return feedProcessor(action.payload);
 
     default:
       return state;
@@ -425,44 +667,53 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _usersReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./usersReducer */ "./src/client/reducers/usersReducer.js");
-/* harmony import */ var _authReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authReducer */ "./src/client/reducers/authReducer.js");
-/* harmony import */ var _adminsReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./adminsReducer */ "./src/client/reducers/adminsReducer.js");
-
+/* harmony import */ var _feedReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedReducer */ "./src/client/reducers/feedReducer.js");
+/* harmony import */ var _upvoteReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./upvoteReducer */ "./src/client/reducers/upvoteReducer.js");
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _usersReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  auth: _authReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  admins: _adminsReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  feed: _feedReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  upvotes: _upvoteReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
 
-/***/ "./src/client/reducers/usersReducer.js":
-/*!*********************************************!*\
-  !*** ./src/client/reducers/usersReducer.js ***!
-  \*********************************************/
+/***/ "./src/client/reducers/upvoteReducer.js":
+/*!**********************************************!*\
+  !*** ./src/client/reducers/upvoteReducer.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./src/client/actions/index.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "@babel/runtime/helpers/defineProperty");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./src/client/actions/index.js");
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions__WEBPACK_IMPORTED_MODULE_0__["FETCH_USERS"]:
-      return action.payload.data;
+    case _actions__WEBPACK_IMPORTED_MODULE_1__["FETCH_UPVOTES"]:
+      return action.payload;
+
+    case _actions__WEBPACK_IMPORTED_MODULE_1__["UPDATE_UPVOTES"]:
+      return _objectSpread({}, state, {}, action.payload);
 
     default:
       return state;
   }
 });
+;
 
 /***/ }),
 
@@ -520,12 +771,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (function (req) {
+/* harmony default export */ __webpack_exports__["default"] = (function () {
   var axios = axios__WEBPACK_IMPORTED_MODULE_2___default.a.create({
-    baseURL: _shared_constants__WEBPACK_IMPORTED_MODULE_4__["API_URL"],
-    headers: {
-      cookie: req.get('cookie') || ''
-    }
+    baseURL: "".concat(_shared_constants__WEBPACK_IMPORTED_MODULE_4__["API_URL"], "/api/v1")
   });
   var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_client_reducers__WEBPACK_IMPORTED_MODULE_3__["default"], {}, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a.withExtraArgument(axios)));
   return store;
@@ -569,7 +817,7 @@ __webpack_require__.r(__webpack_exports__);
     location: req.path,
     context: context
   }, Object(react_router_config__WEBPACK_IMPORTED_MODULE_4__["renderRoutes"])(_client_routes__WEBPACK_IMPORTED_MODULE_6__["default"]))));
-  return "\n    <html>\n        <head>\n            <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n            <link rel=\"stylesheet\" href=\"bundle.css\" />\n        </head>\n        <body>\n            <div id=\"root\">".concat(content, "</div>\n            <script>\n                window.INITIAL_STATE = ").concat(serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(store.getState()), "\n            </script>\n            <script src=\"bundle.js\"></script>\n        </body>\n    </html>\n    ");
+  return "\n    <html>\n        <head>\n            <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n            <link rel=\"stylesheet\" href=\"bundle.css\" />\n        </head>\n        <body>\n            <div class=\"container pb-4\">\n                <div id=\"root\">".concat(content, "</div>\n            </div>\n            <script>\n                window.INITIAL_STATE = ").concat(serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(store.getState()), "\n            </script>\n            <script src=\"bundle.js\"></script>\n        </body>\n    </html>\n    ");
 });
 
 /***/ }),
@@ -602,14 +850,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var app = express__WEBPACK_IMPORTED_MODULE_0___default()();
 app.use(_shared_constants__WEBPACK_IMPORTED_MODULE_6__["PROXY_PATH"], express_http_proxy__WEBPACK_IMPORTED_MODULE_1___default()(_shared_constants__WEBPACK_IMPORTED_MODULE_6__["API_URL"], {
-  proxyReqOptDecorator: function proxyReqOptDecorator(opts) {
-    opts.headers['X-Forwarded-Host'] = 'localhost:3000';
-    return opts;
+  proxyReqPathResolver: function proxyReqPathResolver(req) {
+    return "".concat(_shared_constants__WEBPACK_IMPORTED_MODULE_6__["PROXY_PATH"]).concat(req.url);
   }
 }));
 app.use(express__WEBPACK_IMPORTED_MODULE_0___default.a.static('public'));
 app.get('*', function (req, res) {
-  var store = Object(_helpers_createStore__WEBPACK_IMPORTED_MODULE_4__["default"])(req);
+  var store = Object(_helpers_createStore__WEBPACK_IMPORTED_MODULE_4__["default"])();
   var promises = Object(react_router_config__WEBPACK_IMPORTED_MODULE_2__["matchRoutes"])(_client_routes__WEBPACK_IMPORTED_MODULE_5__["default"], req.path).map(function (_ref) {
     var route = _ref.route;
     return route.loadData ? route.loadData(store) : null;
@@ -665,8 +912,19 @@ app.listen(envPort, function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "API_URL", function() { return API_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROXY_PATH", function() { return PROXY_PATH; });
-var API_URL = 'https://react-ssr-api.herokuapp.com';
-var PROXY_PATH = '/api';
+var API_URL = 'https://hn.algolia.com';
+var PROXY_PATH = '/api/v1';
+
+/***/ }),
+
+/***/ "@babel/runtime/helpers/assertThisInitialized":
+/*!***************************************************************!*\
+  !*** external "@babel/runtime/helpers/assertThisInitialized" ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/helpers/assertThisInitialized");
 
 /***/ }),
 
@@ -843,6 +1101,17 @@ module.exports = require("react-router-config");
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-dom");
+
+/***/ }),
+
+/***/ "recharts":
+/*!***************************!*\
+  !*** external "recharts" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("recharts");
 
 /***/ }),
 

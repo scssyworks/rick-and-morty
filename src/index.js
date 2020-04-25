@@ -8,14 +8,13 @@ import { API_URL, PROXY_PATH } from './shared/constants';
 const app = express();
 
 app.use(PROXY_PATH, proxy(API_URL, {
-    proxyReqOptDecorator(opts) {
-        opts.headers['X-Forwarded-Host'] = 'localhost:3000';
-        return opts;
+    proxyReqPathResolver(req) {
+        return `${PROXY_PATH}${req.url}`;
     }
 }));
 app.use(express.static('public'));
 app.get('*', (req, res) => {
-    const store = createStore(req);
+    const store = createStore();
     const promises = matchRoutes(routes, req.path)
         .map(({ route }) => {
             return route.loadData ? route.loadData(store) : null;
