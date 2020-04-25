@@ -16,9 +16,15 @@ export default (req, store, context) => {
     );
 
     return `
-    <html>
+    <!DOCTYPE html>
+    <html lang="en">
         <head>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <title>Hacker News Clone</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="keywords" content="react, ssr, hackernews, clone, demo, heroku" />
+            <meta name="description" content="This page is a React SSR demo deployed to Heroku." />
+            <link rel="icon" type="image/png" href="https://hn.algolia.com/packs/media/images/logo-hn-search-a822432b.png" />
             <link rel="stylesheet" href="bundle.css" />
         </head>
         <body>
@@ -28,7 +34,7 @@ export default (req, store, context) => {
             <script>
                 window.INITIAL_STATE = ${serialize(store.getState())}
             </script>
-            <script src="bundle.js"></script>
+            <script src="bundle.js" async defer></script>
         </body>
     </html>
     `;
