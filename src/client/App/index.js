@@ -1,11 +1,10 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
-import Header from '../components/Header';
 import { fetchCurrentUser } from '../actions';
+import './index.scss';
 
 const App = ({ route }) => (
     <React.Fragment>
-        <Header />
         {renderRoutes(route.routes)}
     </React.Fragment>
 );

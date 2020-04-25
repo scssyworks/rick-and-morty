@@ -15,7 +15,6 @@ app.use(PROXY_PATH, proxy(API_URL, {
 }));
 app.use(express.static('public'));
 app.get('*', (req, res) => {
-    console.log(`REQ received from: ${req.path}`);
     const store = createStore(req);
     const promises = matchRoutes(routes, req.path)
         .map(({ route }) => {
@@ -50,7 +49,7 @@ app.get('*', (req, res) => {
             console.error(...args);
         });
 });
-
-app.listen(3000, () => {
-    console.log('Listening on PORT 3000');
+const envPort = process.env.PORT || 3000;
+app.listen(envPort, () => {
+    console.log(`Server up and running on PORT ${envPort}`);
 });

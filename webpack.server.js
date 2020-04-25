@@ -2,6 +2,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
+const webpack = require('webpack');
 
 const config = {
     // Set current mode to development
@@ -18,6 +19,14 @@ const config = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'build')
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(sc|sa|c)ss$/,
+                loader: 'ignore-loader'
+            }
+        ]
     }
 };
 
