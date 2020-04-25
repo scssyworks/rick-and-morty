@@ -7,7 +7,8 @@
         "start": "npm-run-all --parallel dev:*",
         "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
         "dev:build-server": "webpack --config webpack.server.js --watch",
-        "dev:build-client": "webpack --config webpack.client.js --watch"
+        "dev:build-client": "webpack --config webpack.client.js --watch",
+        "build": "webpack --config webpack.server.prod.js && webpack --config webpack.client.prod.js"
     },
     "author": "",
     "license": "ISC",
@@ -49,6 +50,7 @@
         "ignore-loader": "^0.1.2",
         "mini-css-extract-plugin": "^0.9.0",
         "node-sass": "^4.14.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.3",
         "postcss-loader": "^3.0.0",
         "resolve-url-loader": "^3.1.1",
         "sass-loader": "^8.0.2",
