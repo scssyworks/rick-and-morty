@@ -23,7 +23,25 @@ const config = {
         rules: [
             {
                 test: /\.(sc|sa|c)ss$/,
+                exclude: /main.(sc|sa|c)ss/,
                 loader: 'ignore-loader'
+            },
+            {
+                test: /main.(sc|sa|c)ss/,
+                use: [
+                    {
+                        loader: 'to-string-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
             }
         ]
     }

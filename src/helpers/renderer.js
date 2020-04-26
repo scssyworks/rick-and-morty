@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
 import routes from '../client/routes';
+import inlineCss from './main.scss';
 
 export default (req, store, context) => {
     const content = renderToString(
@@ -25,7 +26,11 @@ export default (req, store, context) => {
             <meta name="keywords" content="react, ssr, hackernews, clone, demo, heroku" />
             <meta name="description" content="This page is a React SSR demo deployed to Heroku." />
             <link rel="icon" type="image/png" href="https://hn.algolia.com/packs/media/images/logo-hn-search-a822432b.png" />
-            <link rel="stylesheet" href="bundle.css" />
+            <style>
+                ${inlineCss}
+            </style>
+            <link rel="preload" href="bundle.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+            <noscript><link rel="stylesheet" href="bundle.css" /></noscript>
         </head>
         <body>
             <div class="container pb-4">
