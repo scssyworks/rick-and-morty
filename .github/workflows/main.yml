@@ -38,5 +38,5 @@ jobs:
     # Deploy to heroku
     - name: Deploy to heroku
       run: |
-        git filter-branch -- --all
+        git commit -am "Heroku commit"
         git push heroku master
