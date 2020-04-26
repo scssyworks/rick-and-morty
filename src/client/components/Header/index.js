@@ -6,7 +6,7 @@ const Header = () => (
         <div className="logo">
             <img src="https://hn.algolia.com/packs/media/images/logo-hn-search-a822432b.png" alt="Hacker News clone" />
         </div>
-        <h1>Hacker News Clone</h1>
+        <h1>Hacker News Clone v2</h1>
     </header>
 );
 
