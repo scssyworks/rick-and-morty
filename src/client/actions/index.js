@@ -94,7 +94,7 @@ function hideFeedLS(authorId) {
             }
         }, 0);
     });
-};
+}
 // Temporary local storage code ends
 
 export const FETCH_UPVOTES = 'fetch_upvotes';

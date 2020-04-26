@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { LineChart, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
 import { fetchHackerNewsFeed, fetchUpvotes, updateUpvotes, fetchHiddenFeeds, hideFeed } from '../../actions';
 import './index.scss';
 
 class HomePage extends Component {
+    static propTypes = {
+        upvotes: PropTypes.object.isRequired,
+        feed: PropTypes.array.isRequired,
+        hidden: PropTypes.object.isRequired,
+        updateUpvotes: PropTypes.func.isRequired,
+        fetchHackerNewsFeed: PropTypes.func.isRequired,
+        hideFeed: PropTypes.func.isRequired,
+        fetchUpvotes: PropTypes.func.isRequired,
+        fetchHiddenFeeds: PropTypes.func.isRequired
+    };
+
     page = 1;
     getUpvotes(authorId) {
         const { upvotes } = this.props;

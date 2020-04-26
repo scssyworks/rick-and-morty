@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const NotFoundPage = ({ staticContext = {} }) => {
     staticContext.notFound = true;
@@ -7,6 +8,10 @@ const NotFoundPage = ({ staticContext = {} }) => {
             <h1>Oops! Page not found</h1>
         </React.Fragment>
     );
+};
+
+NotFoundPage.propTypes = {
+    staticContext: PropTypes.object
 };
 
 export default {

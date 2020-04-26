@@ -21,21 +21,24 @@ function getTimeParam(isoTime) {
 }
 
 function feedProcessor(data) {
-    return data.hits.map(feedItem => ({
-        time: getTimeParam(feedItem.created_at),
-        title: feedItem.title,
-        author: feedItem.author,
-        url: feedItem.url,
-        commentCount: feedItem.num_comments,
-        authorId: `${feedItem.author}_${(new Date(feedItem.created_at)).getTime()}`
-    }));
+    if (data && data.hits) {
+        return data.hits.map(feedItem => ({
+            time: getTimeParam(feedItem.created_at),
+            title: feedItem.title,
+            author: feedItem.author,
+            url: feedItem.url,
+            commentCount: feedItem.num_comments,
+            authorId: `${feedItem.author}_${(new Date(feedItem.created_at)).getTime()}`
+        }));
+    }
+    return [];
 }
 
 export default function (state = [], action) {
+    const newState = [...state];
+    const newList = feedProcessor(action.payload);
     switch (action.type) {
         case FETCH_HACKER_NEWS_FEED:
-            const newState = [...state];
-            const newList = feedProcessor(action.payload);
             newList.forEach(newItem => {
                 const existing = newState.find(item => item.authorId === newItem.authorId);
                 if (!existing) {
