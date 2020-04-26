@@ -7,3 +7,15 @@
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/utilities/screenreaders";
 @import "~bootstrap/scss/utilities/spacing";
+
+.logo {
+    width: 48px;
+
+    img {
+        width: 100%;
+    }
+}
+
+h1 {
+    font-size: 18px;
+}
