@@ -35,14 +35,7 @@ jobs:
       run: |
         git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
     
-    # Commit to heroku
-    - name: Heroku Commit
-      run: |
-        git config --global user.email "contactsachinsingh@gmail.com"
-        git config --global user.name "Sachin Singh" 
-        git commit -am "Heroku commit"
-    
     # Deploy to heroku
     - name: Deploy to heroku
       run: |
-        git push heroku master
+        git push heroku HEAD:master -f
