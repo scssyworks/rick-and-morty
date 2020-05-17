@@ -2,18 +2,33 @@
 
 li {
     @include padding(16px 8px);
-    width: 25%;
+    display: flex;
+
+    >a {
+        display: flex;
+        width: 100%;
+    }
+
+    @media #{$desktop} {
+        width: 25%;
+    }
 
     article {
         @include border-radius(8px);
         overflow: hidden;
+        background-color: $color-bg-light;
+        width: 100%;
     }
 
     .img {
         position: relative;
 
         img {
-            max-width: 100%;
+            width: 100%;
         }
+    }
+
+    .profile {
+        @include padding(16px);
     }
 }

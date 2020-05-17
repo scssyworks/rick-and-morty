@@ -7,7 +7,7 @@
     left: 0;
     width: 100%;
     z-index: $zindex-p;
-    background-color: rgba($color-bg-extra-dark, 0.7);
+    background-color: rgba($color-bg-extra-dark, 0.6);
 
     .character-name {
         font-family: $font-family-heading;
@@ -17,5 +17,11 @@
     .character-id {
         display: flex;
         justify-content: space-between;
+
+        span {
+            &+& {
+                @include margin-left(8px);
+            }
+        }
     }
 }
