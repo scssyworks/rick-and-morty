@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FilterItem from '../../molecules/FilterItem';
 import './index.scss';
+import { updateFilter } from './actions/updateFilter';
 
 class Filters extends PureComponent {
     static propTypes = {
-        facets: PropTypes.object.isRequired
+        facets: PropTypes.object.isRequired,
+        updateFilter: PropTypes.func.isRequired
     };
 
     filterOnChange(value, filter) {
-        console.log(value, filter);
+        const { updateFilter } = this.props;
+        updateFilter({
+            [filter]: {
+                name: value
+            }
+        });
     }
 
     render() {
@@ -23,12 +30,13 @@ class Filters extends PureComponent {
                             <h3>{facet}</h3>
                             <ul className={`filter ${facet}`}>
                                 {facets[facet].map(
-                                    (filterName, index) => <FilterItem
+                                    (filter, index) => <FilterItem
                                         name={facet}
                                         id={`${index}`}
-                                        key={`${filterName}_${index}`}
-                                        onChange={() => this.filterOnChange(filterName, facet)}
-                                        value={filterName}
+                                        key={`${filter.name}_${index}`}
+                                        onChange={() => this.filterOnChange(filter.name, facet)}
+                                        value={filter.name}
+                                        checked={filter.checked}
                                     />
                                 )}
                             </ul>
@@ -44,4 +52,6 @@ function mapStateToProps({ facets }) {
     return { facets };
 }
 
-export default connect(mapStateToProps, {})(Filters);
+export default connect(mapStateToProps, {
+    updateFilter
+})(Filters);
