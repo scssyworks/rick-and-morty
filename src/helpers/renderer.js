@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
 import routes from '../client/routes';
-import inlineCss from './main.scss';
+import inlineCss from '../styles/main.scss';
 
 export default (req, store, context) => {
     const content = renderToString(
@@ -20,12 +20,12 @@ export default (req, store, context) => {
     <!DOCTYPE html>
     <html lang="en">
         <head>
-            <title>Hacker News Clone</title>
+            <title>Rick and Morty</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta name="keywords" content="react, ssr, hackernews, clone, demo, heroku" />
             <meta name="description" content="This page is a React SSR demo deployed to Heroku." />
-            <link rel="icon" type="image/png" href="https://hn.algolia.com/packs/media/images/logo-hn-search-a822432b.png" />
+            <link rel="icon" type="image/png" href="https://www.rickandmorty.com/assets/meta/favicon-16x16.png" />
             <style>
                 ${inlineCss}
             </style>

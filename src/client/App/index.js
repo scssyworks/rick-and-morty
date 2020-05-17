@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { renderRoutes } from 'react-router-config';
-import Header from '../components/Header';
 
 const App = ({ route }) => (
     <React.Fragment>
-        <Header />
         {renderRoutes(route.routes)}
     </React.Fragment>
 );

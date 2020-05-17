@@ -1,7 +1,7 @@
 ![CI](https://github.com/scssyworks/React-SSR/workflows/CI/badge.svg?branch=master)
 
-# React-SSR
-Hacker News Clone with React and Server Side Rendering
+# Rick and Morty Characters
+This is a DEMO application to list rick and morty characters
 
 ## Install
 

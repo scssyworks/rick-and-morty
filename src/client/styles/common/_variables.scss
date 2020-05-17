@@ -1,20 +1,31 @@
-// Colors
-$color-primary: #000000;
-$color-secondary: #707070;
+// Body width
+$body-max-width: 1440px;
+// Variables for z-index
+$zindex-default: 0;
+// Maximum 3 levels allowed in z-index
+$zindex-p: 1; // primary
+$zindex-s: 2; // secondary
+$zindex-t: 3; // tertiary
+// To move element to the background
+$zindex-hide: -1;
+//z-index header to be greater than others except modal
+$zindex-header: 100;
+$zindex-nav: $zindex-header+1;
+$zindex-top: 9999;
+// Main content width
+$main-content-width: 1440px;
 
-// Background colors
-$bg-color-primary: #f6f6ef;
-$bg-color-secondary: #dadada;
-$bg-color-header: #ff742b;
-
-// Border colors
-$border-color-caret: #006400; 
-
-// Font family
-$font-family-default: Verdana,
-Geneva,
-Tahoma,
+// Fonts
+// Font family variables
+$font-family-body: 'Barlow',
+sans-serif;
+$font-family-heading: 'Barlow Semi Condensed',
 sans-serif;
 
-// Font sizes
-$font-baseline: 14px;
+$font-baseline: 16px;
+
+// Font weight variables
+$font-weight-light: 200;
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
