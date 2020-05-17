@@ -1,0 +1,30 @@
+@import '../../../styles/common/imports';
+
+.applied-facets {
+    @include padding(16px 0);
+    list-style: none;
+    display: flex;
+
+    li {
+        @include margin-bottom(4px);
+        @include margin-right(4px);
+        @include padding(0 12px 4px);
+        background-color: $color-bg-dark;
+        color: $color-text-light;
+
+        span {
+            @include padding-right(4px);
+            display: inline-block;
+        }
+
+        button {
+            padding: 0;
+            line-height: 0;
+            vertical-align: middle;
+
+            em {
+                color: $color-text-light;
+            }
+        }
+    }
+}

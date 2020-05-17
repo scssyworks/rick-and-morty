@@ -97,6 +97,26 @@ input[type="checkbox"] {
   border: 1px solid #333;
   list-style: none; }
 
+.applied-facets {
+  padding: 1rem 0;
+  list-style: none;
+  display: flex; }
+  .applied-facets li {
+    margin-bottom: 0.25rem;
+    margin-right: 0.25rem;
+    padding: 0 0.75rem 0.25rem;
+    background-color: #444;
+    color: #fff; }
+    .applied-facets li span {
+      padding-right: 0.25rem;
+      display: inline-block; }
+    .applied-facets li button {
+      padding: 0;
+      line-height: 0;
+      vertical-align: middle; }
+      .applied-facets li button em {
+        color: #fff; }
+
 header {
   margin-bottom: 1rem;
   padding: 0.25rem 1rem;

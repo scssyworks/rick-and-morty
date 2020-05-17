@@ -1,5 +1,6 @@
 import { FETCH_CONTENT } from '../actions/fetchContent';
 import { UPDATE_FILTER } from '../../../components/organisms/Filters/actions/updateFilter';
+import { CLEAR_FILTER } from '../../../components/organisms/AppliedFacets/actions/clearFilter';
 
 function processFacets(payload, state) {
     if (payload.results) {
@@ -36,12 +37,25 @@ function updateFilters(payload, state) {
     return state;
 }
 
+function clearCheckedItems(facet, state) {
+    if (facet) {
+        const newState = { ...state };
+        state[facet].forEach(item => {
+            item.checked = false;
+        });
+        return newState;
+    }
+    return state;
+}
+
 export default function (state = {}, action) {
     switch (action.type) {
         case FETCH_CONTENT:
             return processFacets(action.payload, state);
         case UPDATE_FILTER:
             return updateFilters(action.payload, state);
+        case CLEAR_FILTER:
+            return clearCheckedItems(action.payload, state);
         default:
             return state;
     }

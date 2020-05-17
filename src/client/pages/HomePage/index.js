@@ -5,6 +5,7 @@ import { fetchContent } from './actions/fetchContent';
 import './index.scss';
 import Characters from '../../components/organisms/Characters';
 import Filters from '../../components/organisms/Filters';
+import AppliedFacets from '../../components/organisms/AppliedFacets';
 
 
 class HomePage extends Component {
@@ -22,6 +23,7 @@ class HomePage extends Component {
                 <section className="content">
                     <section className="filter-selection">
                         <h2>Selected Filters</h2>
+                        <AppliedFacets />
                     </section>
                     <section className="inline-filters"></section>
                     <section className="character-list">
