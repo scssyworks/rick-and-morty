@@ -8,25 +8,28 @@
 @import "~bootstrap/scss/utilities/screenreaders";
 @import "~bootstrap/scss/utilities/spacing";
 
+@import "../client/styles/common/imports";
+@import "../client/styles/common/typography";
+
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 14px;
+    font-family: $font-family-default;
+    font-size: $font-baseline;
 }
 
 .container {
-    background-color: #f6f6ef;
+    background-color: $bg-color-primary;
 }
 
 button {
+    @extend %cursor;
     background-color: transparent;
     border: 0;
     outline: 0;
-    cursor: pointer;
 }
 
 a,
-[tabindex="0"] {
-    cursor: pointer;
+[tabindex] {
+    @extend %cursor;
     display: inline-block;
 
     &,
@@ -46,19 +49,17 @@ a,
     border: 5px solid transparent;
 
     &.up {
-        border-bottom: 5px solid #006400;
+        border-bottom: 5px solid $border-color-caret;
         border-top: 0;
     }
 }
 
 .logo {
+    display: inline-block;
     width: 48px;
+    margin-right: 4px;
 
     img {
         width: 100%;
     }
-}
-
-h1 {
-    font-size: 18px;
 }

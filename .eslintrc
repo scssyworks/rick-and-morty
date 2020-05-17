@@ -5,6 +5,11 @@
         "commonjs": true,
         "es6": true
     },
+    "settings": {
+        "react": {
+            "version": "16.13.1"
+        }
+    },
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 6,

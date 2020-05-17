@@ -88780,7 +88780,7 @@ var Header = function Header() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: "https://hn.algolia.com/packs/media/images/logo-hn-search-a822432b.png",
     alt: "Hacker News clone"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hacker News Clone"));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hacker News Clone v2"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
