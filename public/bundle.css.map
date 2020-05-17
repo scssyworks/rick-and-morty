@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"bundle.css","sourcesContent":[],"sourceRoot":""}
+{"version":3,"sources":["webpack:///./src/client/components/organisms/Header/index.scss"],"names":[],"mappings":";AAAA;AACA;AACA;AACA;AACA,sBAAsB","file":"bundle.css","sourcesContent":["header {\n  margin-bottom: 1rem;\n  padding: 0.25rem;\n  margin-left: -15px;\n  margin-right: -15px; }\n"],"sourceRoot":""}

@@ -1,7 +1,8 @@
+@import '../../../styles/common/imports';
+
 header {
-    background-color: #ff742b;
+    @include margin-bottom(16px);
+    @include padding(4px);
     margin-left: -15px;
     margin-right: -15px;
-    margin-bottom: 15px;
-    padding: 4px;
 }
