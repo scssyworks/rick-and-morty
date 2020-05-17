@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { fetchContent } from './actions/fetchContent';
 import './index.scss';
 import Characters from '../../components/organisms/Characters';
+import Filters from '../../components/organisms/Filters';
 
 
 class HomePage extends Component {
@@ -16,6 +17,7 @@ class HomePage extends Component {
             <section className="characters">
                 <section className="filters">
                     <h2>Filters</h2>
+                    <Filters />
                 </section>
                 <section className="content">
                     <section className="filter-selection">

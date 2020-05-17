@@ -1,0 +1,13 @@
+@import '../../../styles/common/imports';
+
+.filter-section {
+    h3 {
+        text-transform: capitalize;
+    }
+
+    .filter {
+        @include padding(16px);
+        border: 1px solid $color-border-dark;
+        list-style: none;
+    }
+}

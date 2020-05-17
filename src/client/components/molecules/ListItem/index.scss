@@ -1,8 +1,9 @@
 @import '../../../styles/common/imports';
 
-li {
+li.list-item {
     @include padding(16px 8px);
     display: flex;
+    width: 50%;
 
     >a {
         display: flex;

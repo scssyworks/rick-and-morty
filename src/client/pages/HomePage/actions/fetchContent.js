@@ -6,6 +6,6 @@ export const fetchContent = () => async (...args) => {
     const res = await api.get(URL);
     dispatch({
         type: FETCH_CONTENT,
-        payload: [...res.data.results]
+        payload: res.data
     });
 }

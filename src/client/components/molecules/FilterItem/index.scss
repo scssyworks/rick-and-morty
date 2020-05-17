@@ -1,0 +1,7 @@
+@import '../../../styles/common/imports';
+
+input {
+    &[type="checkbox"] {
+        @include margin-right(4px);
+    }
+}
