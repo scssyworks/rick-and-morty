@@ -33,7 +33,7 @@ export default (req, store, context) => {
             <noscript><link rel="stylesheet" href="bundle.css" /></noscript>
         </head>
         <body>
-            <div class="container pb-4">
+            <div class="main-container pb-4">
                 <div id="root">${content}</div>
             </div>
             <script>

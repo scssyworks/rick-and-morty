@@ -19,14 +19,21 @@
 body {
     font-family: $font-family-body;
     font-size: $font-baseline;
+    color: $color-text-primary;
 }
 
-.container {
+.main-container {
+    @include padding(0 16px 32px);
     width: 100%;
+    margin: 0 auto;
 
-    @media #{$tablet} {
+    @media #{$desktop} {
         @include max-width($main-content-width);
     }
+}
+
+section {
+    padding: 0;
 }
 
 button {

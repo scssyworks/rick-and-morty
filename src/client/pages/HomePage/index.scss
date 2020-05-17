@@ -1,1 +1,36 @@
 @import "../../styles/common/imports";
+
+$filter-width: 300px;
+
+%content-padding {
+    @include padding(0 16px);
+}
+
+.characters {
+    @include margin-left(-16px);
+    @include margin-right(-16px);
+
+    @media #{$desktop} {
+        margin-left: 0;
+        margin-right: 0;
+        display: flex;
+    }
+}
+
+.filters {
+    @extend %content-padding;
+
+    @media #{$desktop} {
+        @include width($filter-width);
+        @include padding(0 16px 0 0);
+    }
+}
+
+.content {
+    @extend %content-padding;
+
+    @media #{$desktop} {
+        @include padding(0 0 0 16px);
+        width: calc(100% - #{convert-to-rem($filter-width)});
+    }
+}

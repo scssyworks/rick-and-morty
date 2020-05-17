@@ -9,6 +9,7 @@ const app = express();
 
 app.use(PROXY_PATH, proxy(API_URL, {
     proxyReqPathResolver(req) {
+        console.log(req.url);
         return `${PROXY_PATH}${req.url}`;
     }
 }));

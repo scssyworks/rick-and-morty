@@ -1,0 +1,19 @@
+@import '../../../styles/common/imports';
+
+li {
+    @include padding(16px 8px);
+    width: 25%;
+
+    article {
+        @include border-radius(8px);
+        overflow: hidden;
+    }
+
+    .img {
+        position: relative;
+
+        img {
+            max-width: 100%;
+        }
+    }
+}

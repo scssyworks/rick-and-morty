@@ -1,0 +1,15 @@
+@import '../../../styles/common/imports';
+
+ul {
+    @include margin(0 -16px);
+    @include padding(0 8px);
+    list-style: none;
+    background-color: $color-bg-dark;
+    color: $color-text-light;
+
+    @media #{$desktop} {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

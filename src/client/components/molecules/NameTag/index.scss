@@ -1,0 +1,21 @@
+@import '../../../styles/common/imports';
+
+.name {
+    @include padding(8px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: $zindex-p;
+    background-color: rgba($color-bg-extra-dark, 0.7);
+
+    .character-name {
+        font-family: $font-family-heading;
+        font-weight: $font-weight-semibold;
+    }
+
+    .character-id {
+        display: flex;
+        justify-content: space-between;
+    }
+}
