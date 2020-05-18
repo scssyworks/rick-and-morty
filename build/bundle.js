@@ -298,6 +298,62 @@ Checkbox.propTypes = {
 
 /***/ }),
 
+/***/ "./src/client/components/atoms/Dropdown/index.js":
+/*!*******************************************************!*\
+  !*** ./src/client/components/atoms/Dropdown/index.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var Dropdown = function Dropdown(_ref) {
+  var name = _ref.name,
+      id = _ref.id,
+      onChange = _ref.onChange,
+      _ref$options = _ref.options,
+      options = _ref$options === void 0 ? ['select...'] : _ref$options,
+      value = _ref.value,
+      label = _ref.label,
+      className = _ref.className;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: id
+  }, label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: name,
+    id: id,
+    onChange: onChange,
+    value: value,
+    className: className
+  }, options.map(function (_ref2) {
+    var key = _ref2.key,
+        value = _ref2.value;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      value: key,
+      key: key
+    }, value);
+  })));
+};
+
+Dropdown.propTypes = {
+  name: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  options: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
+  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+/* harmony default export */ __webpack_exports__["default"] = (Dropdown);
+
+/***/ }),
+
 /***/ "./src/client/components/atoms/Image/index.js":
 /*!****************************************************!*\
   !*** ./src/client/components/atoms/Image/index.js ***!
@@ -803,6 +859,58 @@ Search.propTypes = {
 /***/ (function(module, exports) {
 
 
+
+/***/ }),
+
+/***/ "./src/client/components/molecules/Sort/index.js":
+/*!*******************************************************!*\
+  !*** ./src/client/components/molecules/Sort/index.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _atoms_Dropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../atoms/Dropdown */ "./src/client/components/atoms/Dropdown/index.js");
+
+
+
+
+var Sort = function Sort(_ref) {
+  var sortByFields = _ref.sortByFields,
+      sortOrderFields = _ref.sortOrderFields,
+      sortByChange = _ref.sortByChange,
+      sortOrderChange = _ref.sortOrderChange;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sort-by-fields"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_Dropdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    name: "sortBy",
+    id: "sortBy",
+    options: sortByFields,
+    onChange: sortByChange,
+    label: "Sort by"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sort-order"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_Dropdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    name: "sortOrder",
+    id: "sortOrder",
+    options: sortOrderFields,
+    onChange: sortOrderChange,
+    label: "Sort order"
+  })));
+};
+
+Sort.propTypes = {
+  sortByFields: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,
+  sortOrderFields: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,
+  sortByChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  sortOrderChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (Sort);
 
 /***/ }),
 
@@ -1370,11 +1478,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! prop-types */ "prop-types");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _molecules_Search__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../molecules/Search */ "./src/client/components/molecules/Search/index.js");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./index.scss */ "./src/client/components/organisms/SearchFilters/index.scss");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _actions_search__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./actions/search */ "./src/client/components/organisms/SearchFilters/actions/search.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _actions_search__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./actions/search */ "./src/client/components/organisms/SearchFilters/actions/search.js");
+/* harmony import */ var _molecules_Sort__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../molecules/Sort */ "./src/client/components/molecules/Sort/index.js");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./index.scss */ "./src/client/components/organisms/SearchFilters/index.scss");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_13__);
 
 
 
@@ -1386,6 +1495,7 @@ __webpack_require__.r(__webpack_exports__);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 
 
 
@@ -1415,10 +1525,31 @@ var SearchFilters = /*#__PURE__*/function (_PureComponent) {
       setSearch(value);
     });
 
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "sortByChange", function () {});
+
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "sortOrderChange", function () {});
+
     return _this;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(SearchFilters, [{
+    key: "getSortByList",
+    value: function getSortByList() {
+      var list = this.props.list;
+      var firstItem = list[0];
+
+      if (firstItem) {
+        return Object.keys(firstItem).map(function (key) {
+          return {
+            key: key,
+            value: key
+          };
+        });
+      }
+
+      return [];
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("section", {
@@ -1426,7 +1557,20 @@ var SearchFilters = /*#__PURE__*/function (_PureComponent) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_molecules_Search__WEBPACK_IMPORTED_MODULE_9__["default"], {
         onChange: this.searchByName,
         value: this.props.search
-      }));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "sorting-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_molecules_Sort__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        sortByFields: this.getSortByList(),
+        sortOrderFields: [{
+          key: 'asc',
+          value: 'Ascending'
+        }, {
+          key: 'desc',
+          value: 'Descending'
+        }],
+        sortByChange: this.sortByChange,
+        sortOrderChange: this.sortOrderChange
+      })));
     }
   }]);
 
@@ -1435,18 +1579,21 @@ var SearchFilters = /*#__PURE__*/function (_PureComponent) {
 
 _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(SearchFilters, "propTypes", {
   setSearch: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.func.isRequired,
-  search: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired
+  search: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired,
+  list: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.array.isRequired
 });
 
 function mapStateToProps(_ref) {
-  var search = _ref.search;
+  var list = _ref.list,
+      search = _ref.search;
   return {
+    list: list,
     search: search
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_11__["connect"])(mapStateToProps, {
-  setSearch: _actions_search__WEBPACK_IMPORTED_MODULE_12__["setSearch"]
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["connect"])(mapStateToProps, {
+  setSearch: _actions_search__WEBPACK_IMPORTED_MODULE_11__["setSearch"]
 })(SearchFilters));
 
 /***/ }),

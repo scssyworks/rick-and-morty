@@ -3,7 +3,20 @@
 .search-filters {
     @include padding-bottom(16px);
 
-    @media #{$tablet} {
+    @media #{$desktop} {
         display: flex;
+        justify-content: space-between;
+    }
+}
+
+.sorting-section {
+    label {
+        @include margin-right(8px);
+    }
+
+    @media #{$desktop} {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
 }
