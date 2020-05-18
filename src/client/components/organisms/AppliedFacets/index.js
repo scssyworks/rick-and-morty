@@ -22,10 +22,14 @@ class AppliedFacets extends PureComponent {
 
     render() {
         const { facets } = this.props;
+        const appliedFacets = this.getAppliedFacets(facets);
+        if (appliedFacets.length === 0) {
+            return <div className="applied-facets">Filters not selected</div>;
+        }
         return (
             <ul className="applied-facets">
                 {
-                    this.getAppliedFacets(facets).map(
+                    appliedFacets.map(
                         (facetName, index) => (
                             <li className="applied-facets-item" key={`${facetName}__${index}`}>
                                 <span>{facetName}</span>

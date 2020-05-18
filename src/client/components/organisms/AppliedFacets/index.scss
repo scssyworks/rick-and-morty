@@ -1,7 +1,7 @@
 @import '../../../styles/common/imports';
 
 .applied-facets {
-    @include padding(16px 0);
+    @include padding(0 0 16px);
     list-style: none;
     display: flex;
 

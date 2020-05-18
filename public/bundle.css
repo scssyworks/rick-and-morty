@@ -98,7 +98,7 @@ input[type="checkbox"] {
   list-style: none; }
 
 .applied-facets {
-  padding: 1rem 0;
+  padding: 0 0 1rem;
   list-style: none;
   display: flex; }
   .applied-facets li {

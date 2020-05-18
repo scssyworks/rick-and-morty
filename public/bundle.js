@@ -38797,9 +38797,17 @@ var AppliedFacets = /*#__PURE__*/function (_PureComponent) {
       var _this = this;
 
       var facets = this.props.facets;
+      var appliedFacets = this.getAppliedFacets(facets);
+
+      if (appliedFacets.length === 0) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+          className: "applied-facets"
+        }, "Filters not selected");
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("ul", {
         className: "applied-facets"
-      }, this.getAppliedFacets(facets).map(function (facetName, index) {
+      }, appliedFacets.map(function (facetName, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("li", {
           className: "applied-facets-item",
           key: "".concat(facetName, "__").concat(index)
