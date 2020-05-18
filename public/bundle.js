@@ -38348,7 +38348,7 @@ __webpack_require__.r(__webpack_exports__);
 var Dropdown = function Dropdown(_ref) {
   var name = _ref.name,
       id = _ref.id,
-      onChange = _ref.onChange,
+      _onChange = _ref.onChange,
       _ref$options = _ref.options,
       options = _ref$options === void 0 ? ['select...'] : _ref$options,
       value = _ref.value,
@@ -38359,7 +38359,9 @@ var Dropdown = function Dropdown(_ref) {
   }, label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
     name: name,
     id: id,
-    onChange: onChange,
+    onChange: function onChange(e) {
+      return _onChange(e.target.value);
+    },
     value: value,
     className: className
   }, options.map(function (_ref2) {
@@ -38915,7 +38917,9 @@ var Sort = function Sort(_ref) {
   var sortByFields = _ref.sortByFields,
       sortOrderFields = _ref.sortOrderFields,
       sortByChange = _ref.sortByChange,
-      sortOrderChange = _ref.sortOrderChange;
+      sortOrderChange = _ref.sortOrderChange,
+      sortBy = _ref.sortBy,
+      sortOrder = _ref.sortOrder;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "sort-by-fields"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_Dropdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -38923,7 +38927,8 @@ var Sort = function Sort(_ref) {
     id: "sortBy",
     options: sortByFields,
     onChange: sortByChange,
-    label: "Sort by"
+    label: "Sort by",
+    value: sortBy
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "sort-order"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_atoms_Dropdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -38931,7 +38936,8 @@ var Sort = function Sort(_ref) {
     id: "sortOrder",
     options: sortOrderFields,
     onChange: sortOrderChange,
-    label: "Sort order"
+    label: "Sort order",
+    value: sortOrder
   })));
 };
 
@@ -38939,7 +38945,9 @@ Sort.propTypes = {
   sortByFields: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,
   sortOrderFields: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,
   sortByChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  sortOrderChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  sortOrderChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  sortBy: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  sortOrder: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Sort);
 
@@ -39210,10 +39218,41 @@ var Characters = /*#__PURE__*/function (_PureComponent) {
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Characters, [{
+    key: "applySort",
+    value: function applySort(list) {
+      var _this$props = this.props,
+          sortBy = _this$props.sortBy,
+          sortOrder = _this$props.sortOrder;
+      list.sort(function (curr, next) {
+        var currVal = curr[sortBy];
+        var nextVal = next[sortBy];
+
+        if (['location', 'origin'].includes(sortBy)) {
+          currVal = curr[sortBy].name;
+          nextVal = next[sortBy].name;
+        }
+
+        if (typeof currVal === 'number' && typeof nextVal === 'number') {
+          if (sortOrder === 'asc') {
+            return currVal - nextVal;
+          }
+
+          return nextVal - currVal;
+        }
+
+        if (sortOrder === 'asc') {
+          return currVal.localeCompare(nextVal);
+        }
+
+        return nextVal.localeCompare(currVal);
+      });
+      return list;
+    }
+  }, {
     key: "render",
     value: function render() {
       var list = this.props.list;
-      var filteredList = list.filter(this.filterItems);
+      var filteredList = this.applySort(list.filter(this.filterItems));
 
       if (filteredList.length === 0) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, "No results!");
@@ -39237,17 +39276,23 @@ var Characters = /*#__PURE__*/function (_PureComponent) {
 _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(Characters, "propTypes", {
   list: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.array.isRequired,
   facets: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.object.isRequired,
-  search: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired
+  search: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired,
+  sortBy: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired,
+  sortOrder: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired
 });
 
 function mapStateToProps(_ref) {
   var list = _ref.list,
       facets = _ref.facets,
-      search = _ref.search;
+      search = _ref.search,
+      sortBy = _ref.sortBy,
+      sortOrder = _ref.sortOrder;
   return {
     list: list,
     facets: facets,
-    search: search
+    search: search,
+    sortBy: sortBy,
+    sortOrder: sortOrder
   };
 }
 
@@ -39478,6 +39523,48 @@ var setSearch = function setSearch(payload) {
 
 /***/ }),
 
+/***/ "./src/client/components/organisms/SearchFilters/actions/sortBy.js":
+/*!*************************************************************************!*\
+  !*** ./src/client/components/organisms/SearchFilters/actions/sortBy.js ***!
+  \*************************************************************************/
+/*! exports provided: SET_SORT_BY, setSortBy */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SORT_BY", function() { return SET_SORT_BY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSortBy", function() { return setSortBy; });
+var SET_SORT_BY = 'set_sort_by';
+var setSortBy = function setSortBy(payload) {
+  return {
+    type: SET_SORT_BY,
+    payload: payload
+  };
+};
+
+/***/ }),
+
+/***/ "./src/client/components/organisms/SearchFilters/actions/sortOrder.js":
+/*!****************************************************************************!*\
+  !*** ./src/client/components/organisms/SearchFilters/actions/sortOrder.js ***!
+  \****************************************************************************/
+/*! exports provided: SET_SORT_ORDER, setSortOrder */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SORT_ORDER", function() { return SET_SORT_ORDER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSortOrder", function() { return setSortOrder; });
+var SET_SORT_ORDER = 'set_sort_order';
+var setSortOrder = function setSortOrder(payload) {
+  return {
+    type: SET_SORT_ORDER,
+    payload: payload
+  };
+};
+
+/***/ }),
+
 /***/ "./src/client/components/organisms/SearchFilters/index.js":
 /*!****************************************************************!*\
   !*** ./src/client/components/organisms/SearchFilters/index.js ***!
@@ -39511,6 +39598,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _molecules_Sort__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../molecules/Sort */ "./src/client/components/molecules/Sort/index.js");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./index.scss */ "./src/client/components/organisms/SearchFilters/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _actions_sortBy__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./actions/sortBy */ "./src/client/components/organisms/SearchFilters/actions/sortBy.js");
+/* harmony import */ var _actions_sortOrder__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./actions/sortOrder */ "./src/client/components/organisms/SearchFilters/actions/sortOrder.js");
 
 
 
@@ -39522,6 +39611,8 @@ __webpack_require__.r(__webpack_exports__);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+
 
 
 
@@ -39552,9 +39643,16 @@ var SearchFilters = /*#__PURE__*/function (_PureComponent) {
       setSearch(value);
     });
 
-    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "sortByChange", function () {});
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "sortByChange", function (value) {
+      var setSortBy = _this.props.setSortBy;
+      setSortBy(value);
+    });
 
-    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "sortOrderChange", function () {});
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "sortOrderChange", function (value) {
+      console.log(value);
+      var setSortOrder = _this.props.setSortOrder;
+      setSortOrder(value);
+    });
 
     return _this;
   }
@@ -39581,6 +39679,9 @@ var SearchFilters = /*#__PURE__*/function (_PureComponent) {
   }, {
     key: "render",
     value: function render() {
+      var _this$props = this.props,
+          sortBy = _this$props.sortBy,
+          sortOrder = _this$props.sortOrder;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("section", {
         className: "search-filters"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_molecules_Search__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -39598,7 +39699,9 @@ var SearchFilters = /*#__PURE__*/function (_PureComponent) {
           value: 'Descending'
         }],
         sortByChange: this.sortByChange,
-        sortOrderChange: this.sortOrderChange
+        sortOrderChange: this.sortOrderChange,
+        sortBy: sortBy,
+        sortOrder: sortOrder
       })));
     }
   }]);
@@ -39609,20 +39712,30 @@ var SearchFilters = /*#__PURE__*/function (_PureComponent) {
 _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(SearchFilters, "propTypes", {
   setSearch: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.func.isRequired,
   search: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired,
-  list: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.array.isRequired
+  list: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.array.isRequired,
+  setSortBy: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.func.isRequired,
+  setSortOrder: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.func.isRequired,
+  sortBy: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired,
+  sortOrder: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired
 });
 
 function mapStateToProps(_ref) {
   var list = _ref.list,
-      search = _ref.search;
+      search = _ref.search,
+      sortBy = _ref.sortBy,
+      sortOrder = _ref.sortOrder;
   return {
     list: list,
-    search: search
+    search: search,
+    sortBy: sortBy,
+    sortOrder: sortOrder
   };
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["connect"])(mapStateToProps, {
-  setSearch: _actions_search__WEBPACK_IMPORTED_MODULE_11__["setSearch"]
+  setSearch: _actions_search__WEBPACK_IMPORTED_MODULE_11__["setSearch"],
+  setSortBy: _actions_sortBy__WEBPACK_IMPORTED_MODULE_14__["setSortBy"],
+  setSortOrder: _actions_sortOrder__WEBPACK_IMPORTED_MODULE_15__["setSortOrder"]
 })(SearchFilters));
 
 /***/ }),
@@ -39661,6 +39774,48 @@ __webpack_require__.r(__webpack_exports__);
       return state;
   }
 });
+
+/***/ }),
+
+/***/ "./src/client/components/organisms/SearchFilters/reducers/sortReducer.js":
+/*!*******************************************************************************!*\
+  !*** ./src/client/components/organisms/SearchFilters/reducers/sortReducer.js ***!
+  \*******************************************************************************/
+/*! exports provided: sortByReducer, sortOrderReducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sortByReducer", function() { return sortByReducer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sortOrderReducer", function() { return sortOrderReducer; });
+/* harmony import */ var _actions_sortBy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/sortBy */ "./src/client/components/organisms/SearchFilters/actions/sortBy.js");
+/* harmony import */ var _actions_sortOrder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/sortOrder */ "./src/client/components/organisms/SearchFilters/actions/sortOrder.js");
+
+
+function sortByReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'id';
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_sortBy__WEBPACK_IMPORTED_MODULE_0__["SET_SORT_BY"]:
+      return action.payload;
+
+    default:
+      return state;
+  }
+}
+function sortOrderReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'asc';
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_sortOrder__WEBPACK_IMPORTED_MODULE_1__["SET_SORT_ORDER"]:
+      return action.payload;
+
+    default:
+      return state;
+  }
+}
 
 /***/ }),
 
@@ -40087,6 +40242,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_HomePage_reducers_listReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/HomePage/reducers/listReducer */ "./src/client/pages/HomePage/reducers/listReducer.js");
 /* harmony import */ var _pages_HomePage_reducers_facetReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/HomePage/reducers/facetReducer */ "./src/client/pages/HomePage/reducers/facetReducer.js");
 /* harmony import */ var _components_organisms_SearchFilters_reducers_searchReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/organisms/SearchFilters/reducers/searchReducer */ "./src/client/components/organisms/SearchFilters/reducers/searchReducer.js");
+/* harmony import */ var _components_organisms_SearchFilters_reducers_sortReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/organisms/SearchFilters/reducers/sortReducer */ "./src/client/components/organisms/SearchFilters/reducers/sortReducer.js");
+
 
 
 
@@ -40094,7 +40251,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   list: _pages_HomePage_reducers_listReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   facets: _pages_HomePage_reducers_facetReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  search: _components_organisms_SearchFilters_reducers_searchReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  search: _components_organisms_SearchFilters_reducers_searchReducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  sortBy: _components_organisms_SearchFilters_reducers_sortReducer__WEBPACK_IMPORTED_MODULE_4__["sortByReducer"],
+  sortOrder: _components_organisms_SearchFilters_reducers_sortReducer__WEBPACK_IMPORTED_MODULE_4__["sortOrderReducer"]
 }));
 
 /***/ }),

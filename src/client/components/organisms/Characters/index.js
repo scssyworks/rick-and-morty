@@ -8,7 +8,9 @@ class Characters extends PureComponent {
     static propTypes = {
         list: PropTypes.array.isRequired,
         facets: PropTypes.object.isRequired,
-        search: PropTypes.string.isRequired
+        search: PropTypes.string.isRequired,
+        sortBy: PropTypes.string.isRequired,
+        sortOrder: PropTypes.string.isRequired
     };
 
     filterItems = (listItem) => {
@@ -39,9 +41,32 @@ class Characters extends PureComponent {
         return true;
     }
 
+    applySort(list) {
+        const { sortBy, sortOrder } = this.props;
+        list.sort((curr, next) => {
+            let currVal = curr[sortBy];
+            let nextVal = next[sortBy];
+            if (['location', 'origin'].includes(sortBy)) {
+                currVal = curr[sortBy].name;
+                nextVal = next[sortBy].name;
+            }
+            if (typeof currVal === 'number' && typeof nextVal === 'number') {
+                if (sortOrder === 'asc') {
+                    return currVal - nextVal;
+                }
+                return nextVal - currVal;
+            }
+            if (sortOrder === 'asc') {
+                return currVal.localeCompare(nextVal);
+            }
+            return nextVal.localeCompare(currVal);
+        });
+        return list;
+    }
+
     render() {
         const { list } = this.props;
-        const filteredList = list.filter(this.filterItems);
+        const filteredList = this.applySort(list.filter(this.filterItems));
         if (filteredList.length === 0) {
             return <div>No results!</div>;
         }
@@ -52,8 +77,8 @@ class Characters extends PureComponent {
     }
 }
 
-function mapStateToProps({ list, facets, search }) {
-    return { list, facets, search };
+function mapStateToProps({ list, facets, search, sortBy, sortOrder }) {
+    return { list, facets, search, sortBy, sortOrder };
 }
 
 export default connect(mapStateToProps, {})(Characters);

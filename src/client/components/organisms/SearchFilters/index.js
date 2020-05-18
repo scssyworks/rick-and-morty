@@ -5,12 +5,17 @@ import { connect } from 'react-redux';
 import { setSearch } from './actions/search';
 import Sort from '../../molecules/Sort';
 import './index.scss';
-
+import { setSortBy } from './actions/sortBy';
+import { setSortOrder } from './actions/sortOrder';
 class SearchFilters extends PureComponent {
     static propTypes = {
         setSearch: PropTypes.func.isRequired,
         search: PropTypes.string.isRequired,
-        list: PropTypes.array.isRequired
+        list: PropTypes.array.isRequired,
+        setSortBy: PropTypes.func.isRequired,
+        setSortOrder: PropTypes.func.isRequired,
+        sortBy: PropTypes.string.isRequired,
+        sortOrder: PropTypes.string.isRequired
     }
 
     searchByName = (value) => {
@@ -29,10 +34,18 @@ class SearchFilters extends PureComponent {
         return [];
     }
 
-    sortByChange = () => { }
-    sortOrderChange = () => { }
+    sortByChange = (value) => {
+        const { setSortBy } = this.props;
+        setSortBy(value);
+    }
+    sortOrderChange = (value) => {
+        console.log(value);
+        const { setSortOrder } = this.props;
+        setSortOrder(value);
+    }
 
     render() {
+        const { sortBy, sortOrder } = this.props;
         return (
             <section className="search-filters">
                 <Search onChange={this.searchByName} value={this.props.search} />
@@ -42,6 +55,8 @@ class SearchFilters extends PureComponent {
                         sortOrderFields={[{ key: 'asc', value: 'Ascending' }, { key: 'desc', value: 'Descending' }]}
                         sortByChange={this.sortByChange}
                         sortOrderChange={this.sortOrderChange}
+                        sortBy={sortBy}
+                        sortOrder={sortOrder}
                     />
                 </div>
             </section>
@@ -49,10 +64,12 @@ class SearchFilters extends PureComponent {
     }
 }
 
-function mapStateToProps({ list, search }) {
-    return { list, search };
+function mapStateToProps({ list, search, sortBy, sortOrder }) {
+    return { list, search, sortBy, sortOrder };
 }
 
 export default connect(mapStateToProps, {
-    setSearch
+    setSearch,
+    setSortBy,
+    setSortOrder
 })(SearchFilters);

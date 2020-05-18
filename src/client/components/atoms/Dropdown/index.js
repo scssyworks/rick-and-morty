@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Dropdown = ({ name, id, onChange, options = ['select...'], value, label, className }) => (
     <React.Fragment>
         <label htmlFor={id}>{label}</label>
-        <select name={name} id={id} onChange={onChange} value={value} className={className}>
+        <select name={name} id={id} onChange={(e) => onChange(e.target.value)} value={value} className={className}>
             {options.map(
                 ({ key, value }) => (
                     <option value={key} key={key}>{value}</option>
