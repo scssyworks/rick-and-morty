@@ -124,6 +124,11 @@ input[type="checkbox"] {
   padding: 0.25rem 1rem;
   border: 1px solid #333; }
 
+.search-input {
+  margin-bottom: 1rem; }
+  @media (min-width: 1024px) {
+    .search-input {
+      margin-bottom: 0; } }
 
 .search-filters {
   padding-bottom: 1rem; }

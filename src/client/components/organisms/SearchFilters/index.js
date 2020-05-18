@@ -22,7 +22,9 @@ class SearchFilters extends PureComponent {
         const { list } = this.props;
         const firstItem = list[0];
         if (firstItem) {
-            return Object.keys(firstItem).map(key => ({ key, value: key }));
+            return Object.keys(firstItem)
+                .filter(key => !['episode', 'hidden'].includes(key))
+                .map(key => ({ key, value: key }));
         }
         return [];
     }

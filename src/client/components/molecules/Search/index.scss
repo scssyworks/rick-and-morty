@@ -1,0 +1,9 @@
+@import '../../../styles/common/imports';
+
+.search-input {
+    @include margin-bottom(16px);
+
+    @media #{$desktop} {
+        margin-bottom: 0;
+    }
+}

@@ -1539,7 +1539,9 @@ var SearchFilters = /*#__PURE__*/function (_PureComponent) {
       var firstItem = list[0];
 
       if (firstItem) {
-        return Object.keys(firstItem).map(function (key) {
+        return Object.keys(firstItem).filter(function (key) {
+          return !['episode', 'hidden'].includes(key);
+        }).map(function (key) {
           return {
             key: key,
             value: key
