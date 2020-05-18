@@ -6,6 +6,7 @@ import './index.scss';
 import Characters from '../../components/organisms/Characters';
 import Filters from '../../components/organisms/Filters';
 import AppliedFacets from '../../components/organisms/AppliedFacets';
+import SearchFilters from '../../components/organisms/SearchFilters';
 
 
 class HomePage extends Component {
@@ -24,6 +25,7 @@ class HomePage extends Component {
                     <section className="filter-selection">
                         <h2>Selected Filters</h2>
                         <AppliedFacets />
+                        <SearchFilters />
                     </section>
                     <section className="inline-filters"></section>
                     <section className="character-list">

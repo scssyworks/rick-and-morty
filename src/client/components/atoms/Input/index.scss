@@ -1,0 +1,10 @@
+@import '../../../styles/common/imports';
+
+.generic-input-label {
+    display: block;
+}
+
+.generic-input-field {
+    @include padding(4px 16px);
+    border: 1px solid $color-border-dark;
+}

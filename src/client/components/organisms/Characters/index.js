@@ -7,7 +7,8 @@ import './index.scss';
 class Characters extends PureComponent {
     static propTypes = {
         list: PropTypes.array.isRequired,
-        facets: PropTypes.object.isRequired
+        facets: PropTypes.object.isRequired,
+        search: PropTypes.string.isRequired
     };
 
     filterItems = (listItem) => {
@@ -29,21 +30,30 @@ class Characters extends PureComponent {
             });
             return isValid;
         }
+        // Check if search input is provided
+        let { search } = this.props;
+        search = search.toLowerCase().trim();
+        if (search) {
+            return listItem.name.toLowerCase().includes(search);
+        }
         return true;
     }
 
     render() {
         const { list } = this.props;
+        const filteredList = list.filter(this.filterItems);
+        if (filteredList.length === 0) {
+            return <div>No results!</div>;
+        }
         return <ul className="list-container">{
-            list
-                .filter(this.filterItems)
+            filteredList
                 .map((listItem) => <ListItem className="list-item" key={listItem.id} listItem={listItem} />)
         }</ul>;
     }
 }
 
-function mapStateToProps({ list, facets }) {
-    return { list, facets };
+function mapStateToProps({ list, facets, search }) {
+    return { list, facets, search };
 }
 
 export default connect(mapStateToProps, {})(Characters);

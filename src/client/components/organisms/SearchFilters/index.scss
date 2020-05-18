@@ -1,0 +1,9 @@
+@import '../../../styles/common/imports';
+
+.search-filters {
+    @include padding-bottom(16px);
+
+    @media #{$tablet} {
+        display: flex;
+    }
+}

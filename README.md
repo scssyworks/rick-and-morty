@@ -1,4 +1,4 @@
-![CI](https://github.com/scssyworks/React-SSR/workflows/CI/badge.svg?branch=master)
+![CI](https://github.com/scssyworks/rick-and-morty/workflows/CI/badge.svg?branch=master)
 
 # Rick and Morty Characters
 This is a DEMO application to list rick and morty characters
